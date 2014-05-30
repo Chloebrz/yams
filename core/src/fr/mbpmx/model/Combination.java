@@ -9,6 +9,7 @@ public enum Combination {
     SIX,
     TWOPAIRS(15, 25),
     THREEOFAKIND(20, 30),
+    FULLHOUSE(25, 35),
     FOUROFAKIND(30, 40),
     STRAIGHT(40, 40),
     YAMS(50, 60),
@@ -24,6 +25,7 @@ public enum Combination {
     }
     
     Combination(int normal, int withBonus){
-        
+        this.normalValue = normal;
+        this.bonusValue = withBonus;
     }
 }

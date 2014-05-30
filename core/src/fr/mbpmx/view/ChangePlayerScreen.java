@@ -1,9 +1,13 @@
 package fr.mbpmx.view;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class ChangePlayerScreen extends YamsScreen {
-	private TextButton nextPlayer;
+	private TextButton buttonNextPlayer;
 
 	@Override
 	public void render(float delta) {
@@ -17,7 +21,17 @@ public class ChangePlayerScreen extends YamsScreen {
 
 	@Override
 	public void show() {
-
+		// Creation of the buttons
+		buttonNextPlayer = new TextButton("Next Player", skin);
+		buttonNextPlayer.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				((Game) Gdx.app.getApplicationListener())
+						.setScreen(new GameScreen());
+			}
+		});
+		buttonNextPlayer.pad(15); // TODO Select the right padding and place the
+									// button in a table
 	}
 
 	@Override

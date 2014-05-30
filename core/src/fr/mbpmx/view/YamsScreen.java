@@ -2,9 +2,11 @@ package fr.mbpmx.view;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-public class YamsScreen implements Screen {
+public abstract class YamsScreen implements Screen {
 	protected Game game;
+	protected Skin skin;
 
 	@Override
 	public void render(float delta) {
@@ -18,7 +20,7 @@ public class YamsScreen implements Screen {
 
 	@Override
 	public void show() {
-
+		skin = new Skin(); // TODO Json file
 	}
 
 	@Override

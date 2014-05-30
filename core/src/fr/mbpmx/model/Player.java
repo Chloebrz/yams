@@ -2,7 +2,7 @@ package fr.mbpmx.model;
 
 public class Player {
 	private String name;
-	private ScoreTable<Combination, Integer> scores;
+	private ScoreTable scores;
 
 	public Player(String name) {
 		this.name = name;
@@ -16,11 +16,11 @@ public class Player {
 		this.name = name;
 	}
 
-	public ScoreTable<Combination, Integer> getScores() {
+	public ScoreTable getScores() {
 		return scores;
 	}
 
-	public void setScores(ScoreTable<Combination, Integer> scores) {
+	public void setScores(ScoreTable scores) {
 		this.scores = scores;
 	}
 }

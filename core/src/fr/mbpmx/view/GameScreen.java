@@ -1,11 +1,12 @@
 package fr.mbpmx.view;
 
+
 public class GameScreen extends YamsScreen {
 	private BoardRenderer renderer;
 
 	@Override
 	public void render(float delta) {
-
+		super.render(delta);
 	}
 
 	@Override

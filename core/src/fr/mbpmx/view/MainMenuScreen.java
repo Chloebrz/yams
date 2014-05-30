@@ -3,7 +3,6 @@ package fr.mbpmx.view;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
@@ -13,7 +12,7 @@ public class MainMenuScreen extends YamsScreen {
 
 	@Override
 	public void render(float delta) {
-
+		super.render(delta);
 	}
 
 	@Override

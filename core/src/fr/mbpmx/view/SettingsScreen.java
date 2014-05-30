@@ -11,7 +11,7 @@ public class SettingsScreen extends YamsScreen {
 
 	@Override
 	public void render(float delta) {
-
+		super.render(delta);
 	}
 
 	@Override

@@ -1,7 +1,10 @@
 package fr.mbpmx.view;
 
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+
 public class MainMenuScreen extends YamsScreen {
-	
+	private TextButton newGame, settings, instructions, exit;
+
 	@Override
 	public void render(float delta) {
 

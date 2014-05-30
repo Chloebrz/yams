@@ -1,6 +1,9 @@
 package fr.mbpmx.view;
 
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+
 public class ChangePlayerScreen extends YamsScreen {
+	private TextButton nextPlayer;
 
 	@Override
 	public void render(float delta) {

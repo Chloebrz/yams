@@ -1,6 +1,9 @@
 package fr.mbpmx.view;
 
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+
 public class SettingsScreen extends YamsScreen {
+	private TextButton back;
 
 	@Override
 	public void render(float delta) {

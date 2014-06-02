@@ -1,22 +1,26 @@
 package fr.mbpmx.controller;
 
-import fr.mbpmx.model.Player;
-import fr.mbpmx.model.Dice;
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.mbpmx.model.Combination;
+import fr.mbpmx.model.Dice;
+import fr.mbpmx.model.DiceValue;
+import fr.mbpmx.model.Player;
+import fr.mbpmx.other.Constants;
 
 public class Controller {
 	private int numberTurnsLeft;
-	Player currentPlayer;
-	Dice dice1, dice2, dice3, dice4, dice5, dice6;
+	private Player currentPlayer;
+	private List<Dice> dices;
 
-	/*
-	 * public boolean onTouchEvent(MotionEvent event) {
-	 * 
-	 * }
-	 */// Equivalent avec LibGDX !
+	// Table containing the number of each dice value (from 1 to 6)
+	private int[] numberOfEachValue;
 
-	public void addScore(Combination combination, boolean bonus) {
+	private int throwsLeft;
 
+	public Controller() {
+		this.throwsLeft = Constants.NUMBER_OF_THROWS;
 	}
 
 	public int getNumberTurnsLeft() {
@@ -35,51 +39,41 @@ public class Controller {
 		this.currentPlayer = currentPlayer;
 	}
 
-	public Dice getDice1() {
-		return dice1;
+	public List<Dice> getDices() {
+		return dices;
 	}
 
-	public void setDice1(Dice dice1) {
-		this.dice1 = dice1;
+	public void setDices(List<Dice> dices) {
+		this.dices = dices;
 	}
 
-	public Dice getDice2() {
-		return dice2;
+	/*
+	 * public boolean onTouchEvent(MotionEvent event) {
+	 * 
+	 * }
+	 */// Equivalent avec LibGDX !
+
+	public void throwDices() {
+		for (int i = 0; i < 4; i++) {
+			if (dices.get(i).isToThrow()) {
+				DiceValue random = DiceValue.randomDiceValue();
+				dices.get(i).setValue(random);
+
+				// Remove the previous value of the dice and add the new one
+				numberOfEachValue[dices.get(i).getValue().getValue() - 1]--;
+				numberOfEachValue[random.getValue() - 1]++;
+			}
+		}
+		throwsLeft--;
 	}
 
-	public void setDice2(Dice dice2) {
-		this.dice2 = dice2;
+	public List<Combination> findCombinations() {
+		// TODO later
+		List<Combination> combinations = new ArrayList<Combination>();
+		return combinations;
 	}
 
-	public Dice getDice3() {
-		return dice3;
-	}
-
-	public void setDice3(Dice dice3) {
-		this.dice3 = dice3;
-	}
-
-	public Dice getDice4() {
-		return dice4;
-	}
-
-	public void setDice4(Dice dice4) {
-		this.dice4 = dice4;
-	}
-
-	public Dice getDice5() {
-		return dice5;
-	}
-
-	public void setDice5(Dice dice5) {
-		this.dice5 = dice5;
-	}
-
-	public Dice getDice6() {
-		return dice6;
-	}
-
-	public void setDice6(Dice dice6) {
-		this.dice6 = dice6;
+	public void addScore(Combination combination) {
+		
 	}
 }

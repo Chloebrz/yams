@@ -5,7 +5,7 @@ public class Dice {
     private boolean toThrow;
     
     public Dice() {
-        
+        this.toThrow = true;
     }
 
     public DiceValue getValue() {

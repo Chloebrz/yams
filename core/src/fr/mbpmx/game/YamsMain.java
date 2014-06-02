@@ -5,7 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
-import fr.mbpmx.other.YamsPresentation;
+import fr.mbpmx.view.MainMenuScreen;
 
 public class YamsMain extends ApplicationAdapter {
 	public final static String TITLE = "Yam's", VERSION = "1";
@@ -13,7 +13,7 @@ public class YamsMain extends ApplicationAdapter {
 	@Override
 	public void create() {
 		((Game) Gdx.app.getApplicationListener())
-				.setScreen(new YamsPresentation());
+				.setScreen(new MainMenuScreen());
 	}
 
 	@Override

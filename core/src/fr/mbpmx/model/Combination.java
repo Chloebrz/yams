@@ -1,26 +1,169 @@
 package fr.mbpmx.model;
 
 public enum Combination {
-	ONE, TWO, THREE, FOUR, FIVE, SIX, TWOPAIRS(15, 25), THREEOFAKIND(20, 30), FULLHOUSE(
-			25, 35), FOUROFAKIND(30, 40), STRAIGHT(40, 40), YAMS(50, 60), PLUS, MINUS, CHANCE;
+	ONE {
+		@Override
+		public int matches(int[] dicesValues) {
+			return dicesValues[0];
+		}
+	},
+	TWO {
+		@Override
+		public int matches(int[] dicesValues) {
+			return dicesValues[1] * 2;
+		}
+	},
+	THREE {
+		@Override
+		public int matches(int[] dicesValues) {
+			return dicesValues[2] * 3;
+		}
+	},
+	FOUR {
+		@Override
+		public int matches(int[] dicesValues) {
+			return dicesValues[3] * 4;
+		}
+	},
+	FIVE {
+		@Override
+		public int matches(int[] dicesValues) {
+			return dicesValues[4] * 5;
+		}
+	},
+	SIX {
+		@Override
+		public int matches(int[] dicesValues) {
+			return dicesValues[5] * 6;
+		}
+	},
+	TWOPAIRS {
+		@Override
+		public int matches(int[] dicesValues) {
+			int pairs = 0;
+			if (dicesValues[1] >= 4) {
+				return 25;
+			}
+			for (int i = 0; i < 5; i++) {
+				if (dicesValues[i] >= 2) {
+					pairs++;
+				}
+			}
+			if (pairs == 2) {
+				return 15;
+			} else {
+				return 0;
+			}
+		}
+	},
+	THREEOFAKIND {
+		@Override
+		public int matches(int[] dicesValues) {
+			if (dicesValues[2] >= 2) {
+				return 30;
+			}
+			for (int i = 0; i < 5; i++) {
+				if (dicesValues[i] >= 3) {
+					return 20;
+				}
+			}
+			return 0;
+		}
+	},
+	FULLHOUSE {
+		@Override
+		public int matches(int[] dicesValues) {
+			boolean pair = false;
+			boolean three = false;
 
-	private int normalValue;
-	private int bonusValue;
+			if ((dicesValues[1] == 2) && (dicesValues[2] == 3)) {
+				return 35;
+			}
 
-	Combination() {
+			for (int i = 0; i < 5; i++) {
+				if (dicesValues[i] == 2) {
+					pair = true;
+				}
+				if (dicesValues[i] == 3) {
+					three = true;
+				}
+			}
+			if (pair && three) {
+				return 25;
+			} else {
+				return 0;
+			}
+		}
+	},
+	FOUROFAKIND {
+		@Override
+		public int matches(int[] dicesValues) {
+			if (dicesValues[3] >= 4) {
+				return 40;
+			}
+			for (int i = 0; i < 5; i++) {
+				if (dicesValues[i] >= 4) {
+					return 30;
+				}
+			}
+			return 0;
+		}
+	},
+	STRAIGHT {
+		@Override
+		public int matches(int[] dicesValues) {
+			for (int i = 0; i < 4; i++) {
+				if (dicesValues[i] == 1) {
+					return 40;
+				}
+			}
+			return 0;
+		}
+	},
+	YAMS {
+		@Override
+		public int matches(int[] dicesValues) {
+			if (dicesValues[4] == 5) {
+				return 60;
+			}
+			for (int i = 0; i < 4; i++) {
+				if (dicesValues[i] == 5) {
+					return 50;
+				}
+			}
+			return 0;
+		}
+	},
+	PLUS {
+		@Override
+		public int matches(int[] dicesValues) {
+			int sum = 0;
+			for (int i = 0; i < 5; i++) {
+				sum += dicesValues[i] * (i + 1);
+			}
+			return sum;
+		}
+	},
+	MINUS {
+		@Override
+		public int matches(int[] dicesValues) {
+			int sum = 0;
+			for (int i = 0; i < 5; i++) {
+				sum += dicesValues[i] * (i + 1);
+			}
+			return sum;
+		}
+	},
+	CHANCE {
+		@Override
+		public int matches(int[] dicesValues) {
+			int sum = 0;
+			for (int i = 0; i < 5; i++) {
+				sum += dicesValues[i] * (i + 1);
+			}
+			return sum;
+		}
+	};
 
-	}
-
-	Combination(int normal, int withBonus) {
-		this.normalValue = normal;
-		this.bonusValue = withBonus;
-	}
-
-	public int getNormalValue() {
-		return normalValue;
-	}
-
-	public int getBonusValue() {
-		return bonusValue;
-	}
+	public abstract int matches(int[] dicesValues);
 }

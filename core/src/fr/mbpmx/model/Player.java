@@ -19,8 +19,4 @@ public class Player {
 	public ScoreTable getScores() {
 		return scores;
 	}
-
-	public void setScores(ScoreTable scores) {
-		this.scores = scores;
-	}
 }

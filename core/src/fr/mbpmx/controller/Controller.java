@@ -21,6 +21,11 @@ public class Controller {
 
 	public Controller() {
 		this.throwsLeft = Constants.NUMBER_OF_THROWS;
+		this.dices = new ArrayList<Dice>();
+		for (int i = 0; i < 5; i++) {
+			dices.add(new Dice());
+		}
+		this.numberOfEachValue = new int[] { 5, 0, 0, 0, 0, 0 };
 	}
 
 	public int getNumberTurnsLeft() {
@@ -49,7 +54,7 @@ public class Controller {
 
 	public void throwDices() {
 		if (throwsLeft > 0) {
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < 5; i++) {
 				if (dices.get(i).isToThrow()) {
 					DiceValue random = DiceValue.randomDiceValue();
 					dices.get(i).setValue(random);

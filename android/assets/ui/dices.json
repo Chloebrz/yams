@@ -1,0 +1,10 @@
+{
+	com.badlogic.gdx.scenes.scene2d.ui.ImageButton: {
+		dice1: { up: dice1up, down: dice1down},
+		dice2: { up: dice2up, down: dice2down},
+		dice3: { up: dice3up, down: dice3down},
+		dice4: { up: dice4up, down: dice4down},
+		dice5: { up: dice5up, down: dice5down},
+		dice6: { up: dice6up, down: dice6down}
+	}
+}

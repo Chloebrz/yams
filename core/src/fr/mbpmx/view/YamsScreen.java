@@ -23,7 +23,7 @@ public abstract class YamsScreen implements Screen {
 
 	@Override
 	public void show() {
-		skin = new Skin(); // TODO Json file
+
 	}
 
 	@Override

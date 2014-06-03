@@ -1,0 +1,89 @@
+
+dices.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+dice1down
+  rotate: false
+  xy: 1, 109
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+dice1up
+  rotate: false
+  xy: 1, 1
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+dice2down
+  rotate: false
+  xy: 109, 109
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+dice2up
+  rotate: false
+  xy: 109, 1
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+dice3down
+  rotate: false
+  xy: 217, 109
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+dice3up
+  rotate: false
+  xy: 217, 1
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+dice4down
+  rotate: false
+  xy: 325, 109
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+dice4up
+  rotate: false
+  xy: 325, 1
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+dice5down
+  rotate: false
+  xy: 433, 109
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+dice5up
+  rotate: false
+  xy: 433, 1
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+dice6down
+  rotate: false
+  xy: 541, 109
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1
+dice6up
+  rotate: false
+  xy: 541, 1
+  size: 106, 106
+  orig: 106, 106
+  offset: 0, 0
+  index: -1

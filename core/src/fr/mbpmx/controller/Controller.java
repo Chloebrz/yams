@@ -47,33 +47,31 @@ public class Controller {
 		this.dices = dices;
 	}
 
-	/*
-	 * public boolean onTouchEvent(MotionEvent event) {
-	 * 
-	 * }
-	 */// Equivalent avec LibGDX !
-
 	public void throwDices() {
-		for (int i = 0; i < 4; i++) {
-			if (dices.get(i).isToThrow()) {
-				DiceValue random = DiceValue.randomDiceValue();
-				dices.get(i).setValue(random);
+		if (throwsLeft > 0) {
+			for (int i = 0; i < 4; i++) {
+				if (dices.get(i).isToThrow()) {
+					DiceValue random = DiceValue.randomDiceValue();
+					dices.get(i).setValue(random);
 
-				// Remove the previous value of the dice and add the new one
-				numberOfEachValue[dices.get(i).getValue().getValue() - 1]--;
-				numberOfEachValue[random.getValue() - 1]++;
+					// Remove the previous value of the dice and add the new one
+					numberOfEachValue[dices.get(i).getValue().getValue() - 1]--;
+					numberOfEachValue[random.getValue() - 1]++;
+				}
 			}
+			throwsLeft--;
 		}
-		throwsLeft--;
 	}
 
 	public List<Combination> findCombinations() {
-		// TODO later
+		// TODO Find possible combinations to highlight them in the score table
 		List<Combination> combinations = new ArrayList<Combination>();
 		return combinations;
 	}
 
 	public void addScore(Combination combination) {
-		
+		currentPlayer.setScore(combination,
+				combination.countPoints(numberOfEachValue));
+		numberTurnsLeft--;
 	}
 }

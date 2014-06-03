@@ -3,43 +3,43 @@ package fr.mbpmx.model;
 public enum Combination {
 	ONE {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			return dicesValues[0];
 		}
 	},
 	TWO {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			return dicesValues[1] * 2;
 		}
 	},
 	THREE {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			return dicesValues[2] * 3;
 		}
 	},
 	FOUR {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			return dicesValues[3] * 4;
 		}
 	},
 	FIVE {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			return dicesValues[4] * 5;
 		}
 	},
 	SIX {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			return dicesValues[5] * 6;
 		}
 	},
 	TWOPAIRS {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			int pairs = 0;
 			if (dicesValues[1] >= 4) {
 				return 25;
@@ -58,7 +58,7 @@ public enum Combination {
 	},
 	THREEOFAKIND {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			if (dicesValues[2] >= 2) {
 				return 30;
 			}
@@ -72,7 +72,7 @@ public enum Combination {
 	},
 	FULLHOUSE {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			boolean pair = false;
 			boolean three = false;
 
@@ -97,7 +97,7 @@ public enum Combination {
 	},
 	FOUROFAKIND {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			if (dicesValues[3] >= 4) {
 				return 40;
 			}
@@ -111,7 +111,7 @@ public enum Combination {
 	},
 	STRAIGHT {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			for (int i = 0; i < 4; i++) {
 				if (dicesValues[i] == 1) {
 					return 40;
@@ -122,7 +122,7 @@ public enum Combination {
 	},
 	YAMS {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			if (dicesValues[4] == 5) {
 				return 60;
 			}
@@ -136,7 +136,7 @@ public enum Combination {
 	},
 	PLUS {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			int sum = 0;
 			for (int i = 0; i < 5; i++) {
 				sum += dicesValues[i] * (i + 1);
@@ -146,7 +146,7 @@ public enum Combination {
 	},
 	MINUS {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			int sum = 0;
 			for (int i = 0; i < 5; i++) {
 				sum += dicesValues[i] * (i + 1);
@@ -156,7 +156,7 @@ public enum Combination {
 	},
 	CHANCE {
 		@Override
-		public int matches(int[] dicesValues) {
+		public int countPoints(int[] dicesValues) {
 			int sum = 0;
 			for (int i = 0; i < 5; i++) {
 				sum += dicesValues[i] * (i + 1);
@@ -165,5 +165,5 @@ public enum Combination {
 		}
 	};
 
-	public abstract int matches(int[] dicesValues);
+	public abstract int countPoints(int[] dicesValues);
 }

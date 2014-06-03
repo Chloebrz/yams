@@ -19,4 +19,8 @@ public class Player {
 	public ScoreTable getScores() {
 		return scores;
 	}
+
+	public void setScore(Combination combination, int value) {
+		scores.put(combination, value);
+	}
 }

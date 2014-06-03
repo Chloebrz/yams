@@ -20,11 +20,14 @@ public class Controller {
 	private int throwsLeft;
 
 	public Controller() {
+		this.currentPlayer = Constants.p1;
 		this.throwsLeft = Constants.NUMBER_OF_THROWS;
+
 		this.dices = new ArrayList<Dice>();
 		for (int i = 0; i < 5; i++) {
 			dices.add(new Dice());
 		}
+
 		this.numberOfEachValue = new int[] { 5, 0, 0, 0, 0, 0 };
 	}
 
@@ -75,8 +78,10 @@ public class Controller {
 	}
 
 	public void addScore(Combination combination) {
-		currentPlayer.setScore(combination,
-				combination.countPoints(numberOfEachValue));
-		numberTurnsLeft--;
+		if (currentPlayer.getScores().get(combination) == -1) {
+			currentPlayer.setScore(combination,
+					combination.countPoints(numberOfEachValue));
+			numberTurnsLeft--;
+		}
 	}
 }

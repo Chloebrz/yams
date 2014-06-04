@@ -38,6 +38,6 @@
 		default: { font: black32, fontColor: black, messageFontColor: gray, background: default.background, cursor: default.selection }
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
-		default: {  }
+		default: { titleFont: white32, titleFontColor: white },
 	}
 }

@@ -78,6 +78,7 @@ public class GameScreen extends YamsScreen {
 		createScoresTable();
 		scoreTable.left().center();
 
+		table.add(heading).row();
 		table.add(scoreTable).space(75);
 		table.add(dicesTable);
 		stage.addActor(table);
@@ -226,10 +227,65 @@ public class GameScreen extends YamsScreen {
 				}
 			}
 		});
+		buttonTwo.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				if (controller.getCurrentPlayer().getScores()
+						.get(Combination.TWO) == -1) {
+					controller.addScore(Combination.TWO);
+					changePlayer();
+				}
+			}
+		});
+		buttonThree.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				if (controller.getCurrentPlayer().getScores()
+						.get(Combination.THREE) == -1) {
+					controller.addScore(Combination.THREE);
+					changePlayer();
+				}
+			}
+		});
+		buttonFour.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				if (controller.getCurrentPlayer().getScores()
+						.get(Combination.FOUR) == -1) {
+					controller.addScore(Combination.FOUR);
+					changePlayer();
+				}
+			}
+		});
+		buttonFive.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				if (controller.getCurrentPlayer().getScores()
+						.get(Combination.FIVE) == -1) {
+					controller.addScore(Combination.FIVE);
+					changePlayer();
+				}
+			}
+		});
+		buttonSix.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				if (controller.getCurrentPlayer().getScores()
+						.get(Combination.SIX) == -1) {
+					controller.addScore(Combination.SIX);
+					changePlayer();
+				}
+			}
+		});
+
+		// TODO add the combinations buttons
 	}
 
 	public void changePlayer() {
 		Dialog dialog = new Dialog("Change player", skin);
 		dialog.text("Are you enjoying this demo?").button("OK").show(stage);
+		// controller.setCurrentPlayer(Constants.changePlayer(controller
+		// .getCurrentPlayer()));
+		// TODO when the button "OK" is pressed
 	}
 }

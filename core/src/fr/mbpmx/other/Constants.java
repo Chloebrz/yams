@@ -9,7 +9,7 @@ public class Constants {
 	
 	public static Player p1, p2;
 
-	public Player changePlayer(Player currentPlayer) {
+	public static Player changePlayer(Player currentPlayer) {
 		if (currentPlayer == p1) {
 			return p2;
 		} else {

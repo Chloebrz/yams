@@ -23,7 +23,7 @@ public enum DiceValue {
 		return this.value;
 	}
 
-	public static DiceValue randomDiceValue() {
+	public static DiceValue generateDiceValue() {
 		return VALUES.get(RANDOM.nextInt(SIZE));
 	}
 }

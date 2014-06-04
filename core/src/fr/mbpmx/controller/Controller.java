@@ -59,7 +59,7 @@ public class Controller {
 		if (throwsLeft > 0) {
 			for (int i = 0; i < 5; i++) {
 				if (dices.get(i).isToThrow()) {
-					DiceValue random = DiceValue.randomDiceValue();
+					DiceValue random = DiceValue.generateDiceValue();
 					dices.get(i).setValue(random);
 
 					// Remove the previous value of the dice and add the new one

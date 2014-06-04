@@ -1,12 +1,7 @@
 package fr.mbpmx.view;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -16,11 +11,8 @@ import fr.mbpmx.model.Combination;
 
 public class GameScreen extends YamsScreen {
 	private Controller controller;
-
-	private Skin skin;
+	
 	// private Skin skinDices;
-	private Stage stage;
-	private Table table;
 
 	private Table scoreTable;
 	private TextButton dice1, dice2, dice3, dice4, dice5;
@@ -32,12 +24,6 @@ public class GameScreen extends YamsScreen {
 	public void render(float delta) {
 		super.render(delta);
 
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		stage.act(delta);
-		stage.draw();
-
 		Table.drawDebug(stage);
 	}
 
@@ -48,16 +34,10 @@ public class GameScreen extends YamsScreen {
 
 	@Override
 	public void show() {
+	    super.show();
 		controller = new Controller();
-
-		stage = new Stage();
-		Gdx.input.setInputProcessor(stage);
-
-		skin = new Skin(Gdx.files.internal("ui/menuSkin.json"),
-				new TextureAtlas("ui/atlas.pack"));
 		// skinDices = new Skin(Gdx.files.internal("ui/dices.json"),
 		// new TextureAtlas("ui/dices.pack"));
-		table = new Table();
 
 		// Create heading (displaying the current player's name)
 		Label heading = new Label(controller.getCurrentPlayer().getName(), skin);

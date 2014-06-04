@@ -78,7 +78,7 @@ public class GameScreen extends YamsScreen {
 			}
 		});
 
-		// Add buttons to the table table.add(heading).spaceBottom(50).row();
+		// Add buttons to the table
 		table.add(dice1).spaceBottom(15).row();
 		table.add(dice2).spaceBottom(15).row();
 		table.add(dice3).spaceBottom(15).row();
@@ -86,16 +86,14 @@ public class GameScreen extends YamsScreen {
 		table.add(dice5).spaceBottom(15).row();
 		table.add(throwDices);
 		table.right().center();
-		// stage.addActor(table);
 
 		scoreTable = new Table();
 		createScoresTable();
 		scoreTable.left().center();
-		// stage.addActor(scoreTable);
 
 		globalTable = new Table();
 		globalTable.setFillParent(true);
-		globalTable.add(scoreTable);
+		globalTable.add(scoreTable).space(75);
 		globalTable.add(table);
 		stage.addActor(globalTable);
 	}

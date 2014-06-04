@@ -12,18 +12,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import fr.mbpmx.controller.Controller;
+import fr.mbpmx.model.Combination;
 
 public class GameScreen extends YamsScreen {
 	private Controller controller;
 
 	private Skin skin;
 	// private Skin skinDices;
-
 	private Stage stage;
-
 	private Table table;
+
+	private Table scoreTable;
 	private TextButton dice1, dice2, dice3, dice4, dice5;
 	private TextButton throwDices;
+
+	private Table globalTable;
 
 	@Override
 	public void render(float delta) {
@@ -34,6 +37,8 @@ public class GameScreen extends YamsScreen {
 
 		stage.act(delta);
 		stage.draw();
+
+		Table.drawDebug(stage);
 	}
 
 	@Override
@@ -54,13 +59,68 @@ public class GameScreen extends YamsScreen {
 		// new TextureAtlas("ui/dices.pack"));
 		table = new Table();
 
-		table.setFillParent(true);
-
 		// Create heading (displaying the current player's name)
 		Label heading = new Label(controller.getCurrentPlayer().getName(), skin);
 		heading.setFontScale(2);
 
-		// Create buttons
+		createDices();
+
+		throwDices = new TextButton("Jeter les dés", skin);
+		throwDices.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				controller.throwDices();
+				dice1.setText(controller.getDices().get(0).toString());
+				dice2.setText(controller.getDices().get(1).toString());
+				dice3.setText(controller.getDices().get(2).toString());
+				dice4.setText(controller.getDices().get(3).toString());
+				dice5.setText(controller.getDices().get(4).toString());
+			}
+		});
+
+		// Add buttons to the table table.add(heading).spaceBottom(50).row();
+		table.add(dice1).spaceBottom(15).row();
+		table.add(dice2).spaceBottom(15).row();
+		table.add(dice3).spaceBottom(15).row();
+		table.add(dice4).spaceBottom(15).row();
+		table.add(dice5).spaceBottom(15).row();
+		table.add(throwDices);
+		table.right().center();
+		// stage.addActor(table);
+
+		scoreTable = new Table();
+		createScoresTable();
+		scoreTable.left().center();
+		// stage.addActor(scoreTable);
+
+		globalTable = new Table();
+		globalTable.setFillParent(true);
+		globalTable.add(scoreTable);
+		globalTable.add(table);
+		stage.addActor(globalTable);
+	}
+
+	@Override
+	public void hide() {
+
+	}
+
+	@Override
+	public void pause() {
+
+	}
+
+	@Override
+	public void resume() {
+
+	}
+
+	@Override
+	public void dispose() {
+
+	}
+
+	public void createDices() {
 		dice1 = new TextButton("Dé 1", skin);
 		dice1.addListener(new ClickListener() {
 			@Override
@@ -101,44 +161,72 @@ public class GameScreen extends YamsScreen {
 						.setToThrow(!controller.getDices().get(4).isToThrow());
 			}
 		});
-
-		throwDices = new TextButton("Jeter les dés", skin);
-		throwDices.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				controller.throwDices();
-			}
-		});
-
-		// Add buttons to the table
-		table.add(heading).spaceBottom(50).row();
-		table.add(dice1).spaceBottom(15).row();
-		table.add(dice2).spaceBottom(15).row();
-		table.add(dice3).spaceBottom(15).row();
-		table.add(dice4).spaceBottom(15).row();
-		table.add(dice5).spaceBottom(15).row();
-		table.add(throwDices);
-
-		stage.addActor(table);
 	}
 
-	@Override
-	public void hide() {
+	public void createScoresTable() {
+		TextButton buttonOne = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.ONE.toString(), skin, "small"));
+		scoreTable.add(buttonOne).row();
 
-	}
+		TextButton buttonTwo = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.TWO.toString(), skin, "small"));
+		scoreTable.add(buttonTwo).row();
 
-	@Override
-	public void pause() {
+		TextButton buttonThree = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.THREE.toString(), skin, "small"));
+		scoreTable.add(buttonThree).row();
 
-	}
+		TextButton buttonFour = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.FOUR.toString(), skin, "small"));
+		scoreTable.add(buttonFour).row();
 
-	@Override
-	public void resume() {
+		TextButton buttonFive = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.FIVE.toString(), skin, "small"));
+		scoreTable.add(buttonFive).row();
 
-	}
+		TextButton buttonSix = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.SIX.toString(), skin, "small"));
+		scoreTable.add(buttonSix).row();
 
-	@Override
-	public void dispose() {
+		TextButton buttonTwoPairs = new TextButton("", skin, "small");
+		scoreTable
+				.add(new Label(Combination.TWOPAIRS.toString(), skin, "small"));
+		scoreTable.add(buttonTwoPairs).row();
 
+		TextButton buttonThreeOfAKind = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.THREEOFAKIND.toString(), skin,
+				"small"));
+		scoreTable.add(buttonThreeOfAKind).row();
+
+		TextButton buttonFullHouse = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.FULLHOUSE.toString(), skin,
+				"small"));
+		scoreTable.add(buttonFullHouse).row();
+
+		TextButton buttonFourOfAKind = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.FOUROFAKIND.toString(), skin,
+				"small"));
+		scoreTable.add(buttonFourOfAKind).row();
+
+		TextButton buttonStraight = new TextButton("", skin, "small");
+		scoreTable
+				.add(new Label(Combination.STRAIGHT.toString(), skin, "small"));
+		scoreTable.add(buttonStraight).row();
+
+		TextButton buttonYams = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.YAMS.toString(), skin, "small"));
+		scoreTable.add(buttonYams).row();
+
+		TextButton buttonPlus = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.PLUS.toString(), skin, "small"));
+		scoreTable.add(buttonPlus).row();
+
+		TextButton buttonMinus = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.MINUS.toString(), skin, "small"));
+		scoreTable.add(buttonMinus).row();
+
+		TextButton buttonChance = new TextButton("", skin, "small");
+		scoreTable.add(new Label(Combination.CHANCE.toString(), skin, "small"));
+		scoreTable.add(buttonChance).row();
 	}
 }

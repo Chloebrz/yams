@@ -26,4 +26,10 @@ public class ScoreTable extends Hashtable<Combination, Integer> {
 		this.put(Combination.MINUS, -1);
 		this.put(Combination.CHANCE, -1);
 	}
+
+	public static void main(String[] args) {
+		ScoreTable scores = new ScoreTable();
+		System.out.println(scores.get(Combination.ONE));
+		System.out.println(scores.get(Combination.ONE) == -1);
+	}
 }

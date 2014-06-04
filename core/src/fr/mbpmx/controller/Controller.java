@@ -78,10 +78,8 @@ public class Controller {
 	}
 
 	public void addScore(Combination combination) {
-		if (currentPlayer.getScores().get(combination) == -1) {
 			currentPlayer.setScore(combination,
 					combination.countPoints(numberOfEachValue));
 			numberTurnsLeft--;
-		}
 	}
 }

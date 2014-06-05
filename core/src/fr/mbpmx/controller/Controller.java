@@ -52,10 +52,13 @@ public class Controller {
 			for (int i = 0; i < 5; i++) {
 				if (dices.get(i).isToThrow()) {
 					DiceValue random = DiceValue.generateDiceValue();
+					
+					// Remove the previous value of the dice
+                    numberOfEachValue[dices.get(i).getValue().getValue() - 1]--;
+                    
 					dices.get(i).setValue(random);
-
-					// Remove the previous value of the dice and add the new one
-					numberOfEachValue[dices.get(i).getValue().getValue() - 1]--;
+					
+					// add the new one
 					numberOfEachValue[random.getValue() - 1]++;
 				}
 			}
@@ -77,20 +80,5 @@ public class Controller {
 	
 	public int getCurrentScore(Combination combination) {
 	    return combination.countPoints(numberOfEachValue);
-	}
-	public static void main (String[] arg) {
-        Player maxime = new Player("Maxime");
-	    Controller controller = new Controller();
-        controller.setCurrentPlayer(maxime);
-
-        controller.throwDices();
-        System.out.println(controller.getDices());
-        System.out.println("1 :" + controller.numberOfEachValue[0] + "\n2 :" + controller.numberOfEachValue[1] + "\n3 :" + controller.numberOfEachValue[2] + "\n4 :" + controller.numberOfEachValue[3] + "\n5 :" + controller.numberOfEachValue[4] + "\n6 :" + controller.numberOfEachValue[5]);
-        
-        controller.getDices().get(2).setToThrow(false);
-        controller.getDices().get(4).setToThrow(false);
-        controller.throwDices();
-        System.out.println(controller.getDices());
-        System.out.println("1 :" + controller.numberOfEachValue[0] + "\n2 :" + controller.numberOfEachValue[1] + "\n3 :" + controller.numberOfEachValue[2] + "\n4 :" + controller.numberOfEachValue[3] + "\n5 :" + controller.numberOfEachValue[4] + "\n6 :" + controller.numberOfEachValue[5]);
 	}
 }

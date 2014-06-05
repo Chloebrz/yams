@@ -221,10 +221,10 @@ public class GameScreen extends YamsScreen {
                     heading.setText(controller.getCurrentPlayer().getName());
                     Dialog dialog = new Dialog("Change player", skin, "small");
                     dialog.text(
-                            "Up to you to bet him,\n"
+                            "Up to you to beat him,\n"
                                     + controller.getCurrentPlayer().getName())
                             .button("OK").show(stage);
-                } else if(controller.getNumberTurnsLeft() == 0) {
+                } else if(object.equals(true) && controller.getNumberTurnsLeft() == 0) {
                     ((Game) Gdx.app.getApplicationListener())
                     .setScreen(new GameOverScreen());
                 }

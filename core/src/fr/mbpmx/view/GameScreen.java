@@ -1,5 +1,7 @@
 package fr.mbpmx.view;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -214,7 +216,7 @@ public class GameScreen extends YamsScreen {
         Dialog dialog = new Dialog("Comfirm", skin, "small") {
             @Override
             protected void result(Object object) {
-                if (object.equals(true)) {
+                if (object.equals(true) && controller.getNumberTurnsLeft() > 0) {
                     controller.changePlayer(c);
                     heading.setText(controller.getCurrentPlayer().getName());
                     Dialog dialog = new Dialog("Change player", skin, "small");
@@ -222,6 +224,9 @@ public class GameScreen extends YamsScreen {
                             "Up to you to bet him,\n"
                                     + controller.getCurrentPlayer().getName())
                             .button("OK").show(stage);
+                } else if(controller.getNumberTurnsLeft() == 0) {
+                    ((Game) Gdx.app.getApplicationListener())
+                    .setScreen(new GameOverScreen());
                 }
             }
         };

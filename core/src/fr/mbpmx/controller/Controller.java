@@ -22,6 +22,7 @@ public class Controller {
     public Controller() {
         this.currentPlayer = Constants.p1;
         this.throwsLeft = Constants.NUMBER_OF_THROWS;
+        this.numberTurnsLeft = Constants.NUMBER_OF_TURNS;
 
         this.dices = new ArrayList<Dice>();
         for (int i = 0; i < 5; i++) {
@@ -97,5 +98,6 @@ public class Controller {
         for (Dice d : dices) {
             d.setToThrow(true);
         }
+        numberTurnsLeft--;
     }
 }

@@ -252,7 +252,7 @@ public class GameScreen extends YamsScreen {
 	            System.out.println("Chosen: " + object);
 	        }
 	    };
-	    dialog.text("Do you comfirm you want to choose " + c.toString() + " and add " + controller.getCurrentScore(c) + " points ?").button("Yes", true);
+	    dialog.text("Do you comfirm\nyou want to choose\n" + c.toString() + "\nand add " + controller.getCurrentScore(c) + " points ?").button("Yes", true);
 	    dialog.button("Cancel", false).show(stage);
 	}
 	

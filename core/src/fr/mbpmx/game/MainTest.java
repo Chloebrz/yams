@@ -1,6 +1,7 @@
 package fr.mbpmx.game;
 
 import fr.mbpmx.controller.Controller;
+import fr.mbpmx.model.Combination;
 import fr.mbpmx.model.Player;
 
 public class MainTest {
@@ -20,6 +21,6 @@ public class MainTest {
 		controller.throwDices();
 		System.out.println(controller.getDices());
 		
-		
+		System.out.println(Combination.STRAIGHT.countPoints(new int[]{0, 1, 1, 1, 1, 1}));
 	}
 }

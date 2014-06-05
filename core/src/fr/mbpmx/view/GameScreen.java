@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import fr.mbpmx.controller.Controller;
 import fr.mbpmx.model.Combination;
-import fr.mbpmx.other.AddScoreListener;
 
 public class GameScreen extends YamsScreen {
 	private Controller controller;
@@ -218,21 +217,21 @@ public class GameScreen extends YamsScreen {
 	}
 
 	public void addScore() {
-		buttonOne.addListener(new AddScoreListener(controller, Combination.ONE));
-		buttonTwo.addListener(new AddScoreListener(controller, Combination.TWO));
-		buttonThree.addListener(new AddScoreListener(controller, Combination.THREE));
-		buttonFour.addListener(new AddScoreListener(controller, Combination.FOUR));
-		buttonFive.addListener(new AddScoreListener(controller, Combination.FIVE));
-		buttonSix.addListener(new AddScoreListener(controller, Combination.SIX));
-		buttonTwoPairs.addListener(new AddScoreListener(controller, Combination.TWOPAIRS));
-		buttonThreeOfAKind.addListener(new AddScoreListener(controller, Combination.THREEOFAKIND));
-		buttonFullHouse.addListener(new AddScoreListener(controller, Combination.FULLHOUSE));
-		buttonFourOfAKind.addListener(new AddScoreListener(controller, Combination.FOUROFAKIND));
-		buttonStraight.addListener(new AddScoreListener(controller, Combination.STRAIGHT));
-		buttonYams.addListener(new AddScoreListener(controller, Combination.YAMS));
-		buttonPlus.addListener(new AddScoreListener(controller, Combination.PLUS));
-		buttonMinus.addListener(new AddScoreListener(controller, Combination.MINUS));
-		buttonChance.addListener(new AddScoreListener(controller, Combination.CHANCE));
+		buttonOne.addListener(new AddScoreListener(Combination.ONE));
+		buttonTwo.addListener(new AddScoreListener(Combination.TWO));
+		buttonThree.addListener(new AddScoreListener(Combination.THREE));
+		buttonFour.addListener(new AddScoreListener(Combination.FOUR));
+		buttonFive.addListener(new AddScoreListener(Combination.FIVE));
+		buttonSix.addListener(new AddScoreListener(Combination.SIX));
+		buttonTwoPairs.addListener(new AddScoreListener(Combination.TWOPAIRS));
+		buttonThreeOfAKind.addListener(new AddScoreListener(Combination.THREEOFAKIND));
+		buttonFullHouse.addListener(new AddScoreListener(Combination.FULLHOUSE));
+		buttonFourOfAKind.addListener(new AddScoreListener(Combination.FOUROFAKIND));
+		buttonStraight.addListener(new AddScoreListener(Combination.STRAIGHT));
+		buttonYams.addListener(new AddScoreListener(Combination.YAMS));
+		buttonPlus.addListener(new AddScoreListener(Combination.PLUS));
+		buttonMinus.addListener(new AddScoreListener(Combination.MINUS));
+		buttonChance.addListener(new AddScoreListener(Combination.CHANCE));
 
 		// TODO add the combinations buttons
 	}
@@ -247,6 +246,33 @@ public class GameScreen extends YamsScreen {
 	
 	public void confirm(Combination c)
 	{
+	    Dialog dialog = new Dialog("Comfirm", skin, "small") {
+	        @Override
+	        protected void result(Object object) {
+	            System.out.println("Chosen: " + object);
+	        }
+	    };
+	    dialog.text("Do you comfirm you want to choose " + c.toString() + " and add " + controller.getCurrentScore(c) + " points ?").button("Yes", true);
+	    dialog.button("Cancel", false).show(stage);
+	}
+	
+	public class AddScoreListener extends ClickListener {
+	    Combination combination;
 	    
+	    
+	    public AddScoreListener(Combination combination) {
+	        super();
+	        this.combination = combination;
+	    }
+
+	    @Override
+	    public void clicked(InputEvent event, float x, float y) {
+	        if (controller.getCurrentPlayer().getScores()
+	                .get(combination) == -1) {
+	            confirm(combination);
+	            controller.addScore(combination);
+	            System.out.println("Coucou c'est moi le AddScoreListener !!");
+	        }
+	    }
 	}
 }

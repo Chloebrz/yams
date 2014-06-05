@@ -35,10 +35,6 @@ public class Controller {
 		return numberTurnsLeft;
 	}
 
-	public void setNumberTurnsLeft(int numberTurnsLeft) {
-		this.numberTurnsLeft = numberTurnsLeft;
-	}
-
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
@@ -49,10 +45,6 @@ public class Controller {
 
 	public List<Dice> getDices() {
 		return dices;
-	}
-
-	public void setDices(List<Dice> dices) {
-		this.dices = dices;
 	}
 
 	public void throwDices() {
@@ -81,5 +73,24 @@ public class Controller {
 			currentPlayer.setScore(combination,
 					combination.countPoints(numberOfEachValue));
 			numberTurnsLeft--;
+	}
+	
+	public int getCurrentScore(Combination combination) {
+	    return combination.countPoints(numberOfEachValue);
+	}
+	public static void main (String[] arg) {
+        Player maxime = new Player("Maxime");
+	    Controller controller = new Controller();
+        controller.setCurrentPlayer(maxime);
+
+        controller.throwDices();
+        System.out.println(controller.getDices());
+        System.out.println("1 :" + controller.numberOfEachValue[0] + "\n2 :" + controller.numberOfEachValue[1] + "\n3 :" + controller.numberOfEachValue[2] + "\n4 :" + controller.numberOfEachValue[3] + "\n5 :" + controller.numberOfEachValue[4] + "\n6 :" + controller.numberOfEachValue[5]);
+        
+        controller.getDices().get(2).setToThrow(false);
+        controller.getDices().get(4).setToThrow(false);
+        controller.throwDices();
+        System.out.println(controller.getDices());
+        System.out.println("1 :" + controller.numberOfEachValue[0] + "\n2 :" + controller.numberOfEachValue[1] + "\n3 :" + controller.numberOfEachValue[2] + "\n4 :" + controller.numberOfEachValue[3] + "\n5 :" + controller.numberOfEachValue[4] + "\n6 :" + controller.numberOfEachValue[5]);
 	}
 }

@@ -66,7 +66,15 @@ public class Controller {
 		}
 	}
 
-	public List<Combination> findCombinations() {
+	public int getThrowsLeft() {
+        return throwsLeft;
+    }
+
+    public void setThrowsLeft(int throwsLeft) {
+        this.throwsLeft = throwsLeft;
+    }
+
+    public List<Combination> findCombinations() {
 		// TODO Find possible combinations to highlight them in the score table
 		List<Combination> combinations = new ArrayList<Combination>();
 		return combinations;
@@ -80,5 +88,9 @@ public class Controller {
 	
 	public int getCurrentScore(Combination combination) {
 	    return combination.countPoints(numberOfEachValue);
+	}
+	
+	public void changePlayer() {
+	    
 	}
 }

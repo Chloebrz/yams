@@ -215,16 +215,13 @@ public class GameScreen extends YamsScreen {
             @Override
             protected void result(Object object) {
                 if (object.equals(true)) {
-                    controller.setCurrentPlayer(Constants
-                            .changePlayer(controller.getCurrentPlayer()));
+                    controller.changePlayer(c);
+                    heading.setText(controller.getCurrentPlayer().getName());
                     Dialog dialog = new Dialog("Change player", skin, "small");
                     dialog.text(
                             "Up to you to bet him,\n"
                                     + controller.getCurrentPlayer().getName())
                             .button("OK").show(stage);
-                    heading.setText(controller.getCurrentPlayer().getName());
-                    controller.addScore(c);
-                    controller.setThrowsLeft(Constants.NUMBER_OF_THROWS);
                 }
             }
         };

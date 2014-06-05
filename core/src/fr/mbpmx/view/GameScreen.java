@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import fr.mbpmx.controller.Controller;
 import fr.mbpmx.model.Combination;
+import fr.mbpmx.other.AddScoreListener;
 
 public class GameScreen extends YamsScreen {
 	private Controller controller;
@@ -103,7 +104,7 @@ public class GameScreen extends YamsScreen {
 
 	@Override
 	public void dispose() {
-
+	    super.dispose();
 	}
 
 	public void createDices() {
@@ -222,6 +223,7 @@ public class GameScreen extends YamsScreen {
 			public void clicked(InputEvent event, float x, float y) {
 				if (controller.getCurrentPlayer().getScores()
 						.get(Combination.ONE) == -1) {
+				    confirm(Combination.ONE);
 					controller.addScore(Combination.ONE);
 					changePlayer();
 				}
@@ -267,16 +269,7 @@ public class GameScreen extends YamsScreen {
 				}
 			}
 		});
-		buttonSix.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				if (controller.getCurrentPlayer().getScores()
-						.get(Combination.SIX) == -1) {
-					controller.addScore(Combination.SIX);
-					changePlayer();
-				}
-			}
-		});
+		buttonSix.addListener(new AddScoreListener(controller, Combination.SIX));
 
 		// TODO add the combinations buttons
 	}
@@ -287,5 +280,10 @@ public class GameScreen extends YamsScreen {
 		// controller.setCurrentPlayer(Constants.changePlayer(controller
 		// .getCurrentPlayer()));
 		// TODO when the button "OK" is pressed
+	}
+	
+	public void confirm(Combination c)
+	{
+	    
 	}
 }

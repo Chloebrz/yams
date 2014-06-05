@@ -68,16 +68,6 @@ public class MainMenuScreen extends YamsScreen {
 		});
 		buttonInstructions.pad(10);
 
-		TextButton buttonGameOver = new TextButton("Game Over Screen", skin);
-		buttonGameOver.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				((Game) Gdx.app.getApplicationListener())
-						.setScreen(new GameOverScreen());
-			}
-		});
-		buttonGameOver.pad(10);
-
 		buttonExit = new TextButton("Exit", skin);
 		buttonExit.addListener(new ClickListener() {
 			@Override
@@ -91,7 +81,6 @@ public class MainMenuScreen extends YamsScreen {
 		table.add(buttonNewGame).spaceBottom(15).row();
 		table.add(buttonSettings).spaceBottom(15).row();
 		table.add(buttonInstructions).spaceBottom(15).row();
-		table.add(buttonGameOver).spaceBottom(15).row();
 		table.add(buttonExit);
 
 		stage.addActor(table);

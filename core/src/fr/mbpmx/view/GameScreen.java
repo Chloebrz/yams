@@ -218,58 +218,21 @@ public class GameScreen extends YamsScreen {
 	}
 
 	public void addScore() {
-		buttonOne.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				if (controller.getCurrentPlayer().getScores()
-						.get(Combination.ONE) == -1) {
-				    confirm(Combination.ONE);
-					controller.addScore(Combination.ONE);
-					changePlayer();
-				}
-			}
-		});
-		buttonTwo.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				if (controller.getCurrentPlayer().getScores()
-						.get(Combination.TWO) == -1) {
-					controller.addScore(Combination.TWO);
-					changePlayer();
-				}
-			}
-		});
-		buttonThree.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				if (controller.getCurrentPlayer().getScores()
-						.get(Combination.THREE) == -1) {
-					controller.addScore(Combination.THREE);
-					changePlayer();
-				}
-			}
-		});
-		buttonFour.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				if (controller.getCurrentPlayer().getScores()
-						.get(Combination.FOUR) == -1) {
-					controller.addScore(Combination.FOUR);
-					changePlayer();
-				}
-			}
-		});
-		buttonFive.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				if (controller.getCurrentPlayer().getScores()
-						.get(Combination.FIVE) == -1) {
-					controller.addScore(Combination.FIVE);
-					changePlayer();
-				}
-			}
-		});
+		buttonOne.addListener(new AddScoreListener(controller, Combination.ONE));
+		buttonTwo.addListener(new AddScoreListener(controller, Combination.TWO));
+		buttonThree.addListener(new AddScoreListener(controller, Combination.THREE));
+		buttonFour.addListener(new AddScoreListener(controller, Combination.FOUR));
+		buttonFive.addListener(new AddScoreListener(controller, Combination.FIVE));
 		buttonSix.addListener(new AddScoreListener(controller, Combination.SIX));
+		buttonTwoPairs.addListener(new AddScoreListener(controller, Combination.TWOPAIRS));
+		buttonThreeOfAKind.addListener(new AddScoreListener(controller, Combination.THREEOFAKIND));
+		buttonFullHouse.addListener(new AddScoreListener(controller, Combination.FULLHOUSE));
+		buttonFourOfAKind.addListener(new AddScoreListener(controller, Combination.FOUROFAKIND));
+		buttonStraight.addListener(new AddScoreListener(controller, Combination.STRAIGHT));
+		buttonYams.addListener(new AddScoreListener(controller, Combination.YAMS));
+		buttonPlus.addListener(new AddScoreListener(controller, Combination.PLUS));
+		buttonMinus.addListener(new AddScoreListener(controller, Combination.MINUS));
+		buttonChance.addListener(new AddScoreListener(controller, Combination.CHANCE));
 
 		// TODO add the combinations buttons
 	}

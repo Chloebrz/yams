@@ -225,6 +225,7 @@ public class GameScreen extends YamsScreen {
                                     + controller.getCurrentPlayer().getName())
                             .button("OK").show(stage);
                 } else if(object.equals(true) && controller.getNumberTurnsLeft() == 0) {
+                    controller.addScore(c);
                     ((Game) Gdx.app.getApplicationListener())
                     .setScreen(new GameOverScreen());
                 }

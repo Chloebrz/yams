@@ -8,6 +8,7 @@ public class Constants {
 	public static int NUMBER_OF_TURNS = 30;
 	
 	public static Player p1, p2;
+	public static boolean playersInstantiated;
 
 	public static Player changePlayer(Player currentPlayer) {
 		if (currentPlayer == p1) {

@@ -27,8 +27,8 @@ public class MainMenuScreen extends YamsScreen {
 
 	@Override
 	public void show() {
-	    super.show();
-	    
+		super.show();
+
 		// Creating heading
 		Label heading = new Label(YamsMain.TITLE, skin, "big");
 		heading.setFontScale(2);
@@ -38,8 +38,10 @@ public class MainMenuScreen extends YamsScreen {
 		buttonNewGame.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-			    Constants.p1 = new Player("Player 1");
-			    Constants.p2 = new Player("Player 2");
+				if (!Constants.playersInstantiated) {
+					Constants.p1 = new Player("Player 1");
+					Constants.p2 = new Player("Player 2");
+				}
 				((Game) Gdx.app.getApplicationListener())
 						.setScreen(new GameScreen());
 			}
@@ -101,6 +103,6 @@ public class MainMenuScreen extends YamsScreen {
 
 	@Override
 	public void dispose() {
-	    super.dispose();
+		super.dispose();
 	}
 }

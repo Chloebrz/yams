@@ -35,6 +35,6 @@ public class ScoresScreen extends YamsScreen {
 
 	@Override
 	public void dispose() {
-
+		super.dispose();
 	}
 }

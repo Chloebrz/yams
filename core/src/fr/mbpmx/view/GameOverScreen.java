@@ -61,6 +61,6 @@ public class GameOverScreen extends YamsScreen {
 
 	@Override
 	public void dispose() {
-
+		super.dispose();
 	}
 }

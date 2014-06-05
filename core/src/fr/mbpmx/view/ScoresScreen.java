@@ -15,7 +15,7 @@ public class ScoresScreen extends YamsScreen {
 
 	@Override
 	public void show() {
-
+		super.show();
 	}
 
 	@Override

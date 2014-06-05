@@ -33,7 +33,6 @@ public abstract class YamsScreen implements Screen {
 
 	@Override
 	public void show() {
-
         skin = new Skin(Gdx.files.internal("ui/menuSkin.json"),
                 new TextureAtlas("ui/atlas.pack"));
 

@@ -1,5 +1,8 @@
 package fr.mbpmx.model;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 public class Player {
 	private String name;
 	private ScoreTable scores;
@@ -23,5 +26,17 @@ public class Player {
 
 	public void setScore(Combination combination, int value) {
 		scores.put(combination, value);
+	}
+
+	public int getTotalScore() {
+		int sum = 0;
+		Collection<Integer> values = scores.values();
+		Iterator<Integer> iterator = values.iterator();
+		while (iterator.hasNext()) {
+			Integer points = iterator.next();
+			sum += points;
+		}
+
+		return sum;
 	}
 }

@@ -1,5 +1,7 @@
 package fr.mbpmx.game;
 
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+
 import fr.mbpmx.controller.Controller;
 import fr.mbpmx.model.Combination;
 import fr.mbpmx.model.Player;
@@ -22,5 +24,9 @@ public class MainTest {
 		System.out.println(controller.getDices());
 		
 		System.out.println(Combination.STRAIGHT.countPoints(new int[]{0, 1, 1, 1, 1, 1}));
+		
+		for (Combination c : Combination.class.getEnumConstants()) {
+            System.out.println(c.toString());
+        }
 	}
 }

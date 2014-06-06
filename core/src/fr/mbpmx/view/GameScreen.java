@@ -25,11 +25,6 @@ public class GameScreen extends YamsScreen {
     private TextButton dice1, dice2, dice3, dice4, dice5;
     private TextButton throwDices;
 
-    private TextButton buttonOne, buttonTwo, buttonThree, buttonFour,
-            buttonFive, buttonSix, buttonTwoPairs, buttonThreeOfAKind,
-            buttonFullHouse, buttonFourOfAKind, buttonStraight, buttonYams,
-            buttonPlus, buttonMinus, buttonChance;
-
     private Table dicesTable;
 
     private Label heading;
@@ -130,50 +125,11 @@ public class GameScreen extends YamsScreen {
     }
 
     public void createScoresTable() {
-        buttonOne = new TextButton("", skin, "small");
-        textButtons.put(Combination.ONE, buttonOne);
-
-        buttonTwo = new TextButton("", skin, "small");
-        textButtons.put(Combination.TWO, buttonTwo);
-
-        buttonThree = new TextButton("", skin, "small");
-        textButtons.put(Combination.THREE, buttonThree);
-
-        buttonFour = new TextButton("", skin, "small");
-        textButtons.put(Combination.FOUR, buttonFour);
-
-        buttonFive = new TextButton("", skin, "small");
-        textButtons.put(Combination.FIVE, buttonFive);
-
-        buttonSix = new TextButton("", skin, "small");
-        textButtons.put(Combination.SIX, buttonSix);
-
-        buttonTwoPairs = new TextButton("", skin, "small");
-        textButtons.put(Combination.TWOPAIRS, buttonTwoPairs);
-
-        buttonThreeOfAKind = new TextButton("", skin, "small");
-        textButtons.put(Combination.THREEOFAKIND, buttonThreeOfAKind);
-
-        buttonFullHouse = new TextButton("", skin, "small");
-        textButtons.put(Combination.FULLHOUSE, buttonFullHouse);
-
-        buttonFourOfAKind = new TextButton("", skin, "small");
-        textButtons.put(Combination.FOUROFAKIND, buttonFourOfAKind);
-
-        buttonStraight = new TextButton("", skin, "small");
-        textButtons.put(Combination.STRAIGHT, buttonStraight);
-
-        buttonYams = new TextButton("", skin, "small");
-        textButtons.put(Combination.YAMS, buttonYams);
-
-        buttonPlus = new TextButton("", skin, "small");
-        textButtons.put(Combination.PLUS, buttonPlus);
-
-        buttonMinus = new TextButton("", skin, "small");
-        textButtons.put(Combination.MINUS, buttonMinus);
-
-        buttonChance = new TextButton("", skin, "small");
-        textButtons.put(Combination.CHANCE, buttonChance);
+        
+        for (Combination c : Combination.class.getEnumConstants()) {
+            TextButton textButton = new TextButton("", skin, "small");
+            textButtons.put(c, textButton);
+        }
         
         for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet())
         {

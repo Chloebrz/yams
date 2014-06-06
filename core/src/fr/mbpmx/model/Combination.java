@@ -114,7 +114,7 @@ public enum Combination {
 		public int countPoints(int[] dicesValues) {
 		    boolean bool;
 		    if (dicesValues[0] == 1) {
-		        for (int i = 0; i < 5; i++) {
+		        for (int i = 1; i < 5; i++) {
 		            if (dicesValues[i] != 1) {
 		                return 0;
 		            }

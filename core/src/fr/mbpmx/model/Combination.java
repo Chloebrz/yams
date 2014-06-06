@@ -62,7 +62,7 @@ public enum Combination {
 			if (dicesValues[2] >= 2) {
 				return 30;
 			}
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 6; i++) {
 				if (dicesValues[i] >= 3) {
 					return 20;
 				}
@@ -80,7 +80,7 @@ public enum Combination {
 				return 35;
 			}
 
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 6; i++) {
 				if (dicesValues[i] == 2) {
 					pair = true;
 				}
@@ -101,7 +101,7 @@ public enum Combination {
 			if (dicesValues[3] >= 4) {
 				return 40;
 			}
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 6; i++) {
 				if (dicesValues[i] >= 4) {
 					return 30;
 				}
@@ -126,7 +126,7 @@ public enum Combination {
 			if (dicesValues[4] == 5) {
 				return 60;
 			}
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < 6; i++) {
 				if (dicesValues[i] == 5) {
 					return 50;
 				}
@@ -138,7 +138,7 @@ public enum Combination {
 		@Override
 		public int countPoints(int[] dicesValues) {
 			int sum = 0;
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 6; i++) {
 				sum += dicesValues[i] * (i + 1);
 			}
 			return sum;
@@ -148,7 +148,7 @@ public enum Combination {
 		@Override
 		public int countPoints(int[] dicesValues) {
 			int sum = 0;
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 6; i++) {
 				sum += dicesValues[i] * (i + 1);
 			}
 			return sum;
@@ -158,7 +158,7 @@ public enum Combination {
 		@Override
 		public int countPoints(int[] dicesValues) {
 			int sum = 0;
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 6; i++) {
 				sum += dicesValues[i] * (i + 1);
 			}
 			return sum;

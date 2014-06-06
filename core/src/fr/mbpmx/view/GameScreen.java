@@ -240,7 +240,6 @@ public class GameScreen extends YamsScreen {
             if (controller.getCurrentPlayer().getScores().get(combination) == -1
                     && controller.getThrowsLeft() < Constants.NUMBER_OF_THROWS) {
                 confirm(combination);
-                System.out.println("Coucou c'est moi le AddScoreListener !!");
             }
         }
     }

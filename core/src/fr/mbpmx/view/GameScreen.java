@@ -1,6 +1,8 @@
 package fr.mbpmx.view;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Game;
@@ -22,7 +24,7 @@ public class GameScreen extends YamsScreen {
     // private Skin skinDices;
 
     private Table scoreTable;
-    private TextButton dice1, dice2, dice3, dice4, dice5;
+    private List<TextButton> dicesButtons;
     private TextButton throwDices;
 
     private Table dicesTable;
@@ -63,20 +65,16 @@ public class GameScreen extends YamsScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 controller.throwDices();
-                dice1.setText(controller.getDices().get(0).toString());
-                dice2.setText(controller.getDices().get(1).toString());
-                dice3.setText(controller.getDices().get(2).toString());
-                dice4.setText(controller.getDices().get(3).toString());
-                dice5.setText(controller.getDices().get(4).toString());
+                for(int i = 0; i < 5; i++) {
+                    dicesButtons.get(i).setText(controller.getDices().get(i).toString());
+                }
             }
         });
 
         // Add buttons to the table
-        dicesTable.add(dice1).spaceBottom(15).row();
-        dicesTable.add(dice2).spaceBottom(15).row();
-        dicesTable.add(dice3).spaceBottom(15).row();
-        dicesTable.add(dice4).spaceBottom(15).row();
-        dicesTable.add(dice5).spaceBottom(15).row();
+        for(int i = 0; i < 5; i++) {
+            dicesTable.add(dicesButtons.get(i)).spaceBottom(15).row();
+        }
         dicesTable.add(throwDices);
 
         scoreTable = new Table();
@@ -112,16 +110,12 @@ public class GameScreen extends YamsScreen {
     }
 
     public void createDices() {
-        dice1 = new TextButton("Dé 1", skin);
-        dice1.addListener(new AddDiceListener(0));
-        dice2 = new TextButton("Dé 2", skin);
-        dice2.addListener(new AddDiceListener(1));
-        dice3 = new TextButton("Dé 3", skin);
-        dice3.addListener(new AddDiceListener(2));
-        dice4 = new TextButton("Dé 4", skin);
-        dice4.addListener(new AddDiceListener(3));
-        dice5 = new TextButton("Dé 5", skin);
-        dice5.addListener(new AddDiceListener(4));
+        dicesButtons = new ArrayList<TextButton>();
+        for (int i = 0; i < 5; i++) {
+            TextButton dice = new TextButton("Dice " + (i+1), skin);
+            dice.addListener(new AddDiceListener(i));
+            dicesButtons.add(dice);
+        }
     }
 
     public void createScoresTable() {
@@ -166,7 +160,7 @@ public class GameScreen extends YamsScreen {
                     updateScoreTable();
                     Dialog dialog = new Dialog("Change player", skin, "small");
                     dialog.text(
-                            "Up to you to beat him,\n"
+                            "Your turn,\n"
                                     + controller.getCurrentPlayer().getName())
                             .button("OK").show(stage);
                 } else if(object.equals(true) && controller.getNumberTurnsLeft() == 0) {

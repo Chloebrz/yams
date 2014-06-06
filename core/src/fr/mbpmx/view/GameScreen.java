@@ -206,7 +206,7 @@ public class GameScreen extends YamsScreen {
 //        scoreTable.add(buttonMinus).row();
 
         buttonChance = new TextButton("", skin, "small");
-        textButtons.put(Combination.CHANCE, buttonMinus);
+        textButtons.put(Combination.CHANCE, buttonChance);
 //        scoreTable.add(new Label(Combination.CHANCE.toString(), skin, "small"));
 //        scoreTable.add(buttonChance).row();
         

@@ -1,5 +1,8 @@
 package fr.mbpmx.view;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -30,6 +33,8 @@ public class GameScreen extends YamsScreen {
     private Table dicesTable;
 
     private Label heading;
+    
+    private LinkedHashMap<Combination, TextButton> textButtons = new LinkedHashMap<Combination, TextButton>();
 
     @Override
     public void render(float delta) {
@@ -126,69 +131,90 @@ public class GameScreen extends YamsScreen {
 
     public void createScoresTable() {
         buttonOne = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.ONE.toString(), skin, "small"));
-        scoreTable.add(buttonOne).row();
+        textButtons.put(Combination.ONE, buttonOne);
+//        scoreTable.add(new Label(Combination.ONE.toString(), skin, "small"));
+//        scoreTable.add(buttonOne).row();
 
         buttonTwo = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.TWO.toString(), skin, "small"));
-        scoreTable.add(buttonTwo).row();
+        textButtons.put(Combination.TWO, buttonTwo);
+//        scoreTable.add(new Label(Combination.TWO.toString(), skin, "small"));
+//        scoreTable.add(buttonTwo).row();
 
         buttonThree = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.THREE.toString(), skin, "small"));
-        scoreTable.add(buttonThree).row();
+        textButtons.put(Combination.THREE, buttonThree);
+//        scoreTable.add(new Label(Combination.THREE.toString(), skin, "small"));
+//        scoreTable.add(buttonThree).row();
 
         buttonFour = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.FOUR.toString(), skin, "small"));
-        scoreTable.add(buttonFour).row();
+        textButtons.put(Combination.FOUR, buttonFour);
+//        scoreTable.add(new Label(Combination.FOUR.toString(), skin, "small"));
+//        scoreTable.add(buttonFour).row();
 
         buttonFive = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.FIVE.toString(), skin, "small"));
-        scoreTable.add(buttonFive).row();
+        textButtons.put(Combination.FIVE, buttonFive);
+//        scoreTable.add(new Label(Combination.FIVE.toString(), skin, "small"));
+//        scoreTable.add(buttonFive).row();
 
         buttonSix = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.SIX.toString(), skin, "small"));
-        scoreTable.add(buttonSix).row();
+        textButtons.put(Combination.SIX, buttonSix);
+//        scoreTable.add(new Label(Combination.SIX.toString(), skin, "small"));
+//        scoreTable.add(buttonSix).row();
 
         buttonTwoPairs = new TextButton("", skin, "small");
-        scoreTable
-                .add(new Label(Combination.TWOPAIRS.toString(), skin, "small"));
-        scoreTable.add(buttonTwoPairs).row();
+        textButtons.put(Combination.TWOPAIRS, buttonTwoPairs);
+//        scoreTable
+//                .add(new Label(Combination.TWOPAIRS.toString(), skin, "small"));
+//        scoreTable.add(buttonTwoPairs).row();
 
         buttonThreeOfAKind = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.THREEOFAKIND.toString(), skin,
-                "small"));
-        scoreTable.add(buttonThreeOfAKind).row();
+        textButtons.put(Combination.THREEOFAKIND, buttonThreeOfAKind);
+//        scoreTable.add(new Label(Combination.THREEOFAKIND.toString(), skin,
+//                "small"));
+//        scoreTable.add(buttonThreeOfAKind).row();
 
         buttonFullHouse = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.FULLHOUSE.toString(), skin,
-                "small"));
-        scoreTable.add(buttonFullHouse).row();
+        textButtons.put(Combination.FULLHOUSE, buttonFullHouse);
+//        scoreTable.add(new Label(Combination.FULLHOUSE.toString(), skin,
+//                "small"));
+//        scoreTable.add(buttonFullHouse).row();
 
         buttonFourOfAKind = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.FOUROFAKIND.toString(), skin,
-                "small"));
-        scoreTable.add(buttonFourOfAKind).row();
+        textButtons.put(Combination.FOUROFAKIND, buttonFourOfAKind);
+//        scoreTable.add(new Label(Combination.FOUROFAKIND.toString(), skin,
+//                "small"));
+//        scoreTable.add(buttonFourOfAKind).row();
 
         buttonStraight = new TextButton("", skin, "small");
-        scoreTable
-                .add(new Label(Combination.STRAIGHT.toString(), skin, "small"));
-        scoreTable.add(buttonStraight).row();
+        textButtons.put(Combination.STRAIGHT, buttonStraight);
+//        scoreTable
+//                .add(new Label(Combination.STRAIGHT.toString(), skin, "small"));
+//        scoreTable.add(buttonStraight).row();
 
         buttonYams = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.YAMS.toString(), skin, "small"));
-        scoreTable.add(buttonYams).row();
+        textButtons.put(Combination.YAMS, buttonYams);
+//        scoreTable.add(new Label(Combination.YAMS.toString(), skin, "small"));
+//        scoreTable.add(buttonYams).row();
 
         buttonPlus = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.PLUS.toString(), skin, "small"));
-        scoreTable.add(buttonPlus).row();
+        textButtons.put(Combination.PLUS, buttonPlus);
+//        scoreTable.add(new Label(Combination.PLUS.toString(), skin, "small"));
+//        scoreTable.add(buttonPlus).row();
 
         buttonMinus = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.MINUS.toString(), skin, "small"));
-        scoreTable.add(buttonMinus).row();
+        textButtons.put(Combination.MINUS, buttonMinus);
+//        scoreTable.add(new Label(Combination.MINUS.toString(), skin, "small"));
+//        scoreTable.add(buttonMinus).row();
 
         buttonChance = new TextButton("", skin, "small");
-        scoreTable.add(new Label(Combination.CHANCE.toString(), skin, "small"));
-        scoreTable.add(buttonChance).row();
+        textButtons.put(Combination.CHANCE, buttonMinus);
+//        scoreTable.add(new Label(Combination.CHANCE.toString(), skin, "small"));
+//        scoreTable.add(buttonChance).row();
+        
+        for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet())
+        {
+            scoreTable.add(new Label(entry.getKey().toString(), skin, "small"));
+            scoreTable.add(entry.getValue()).row();
+        }
     }
 
     public void addScore() {
@@ -210,6 +236,93 @@ public class GameScreen extends YamsScreen {
         buttonPlus.addListener(new AddScoreListener(Combination.PLUS));
         buttonMinus.addListener(new AddScoreListener(Combination.MINUS));
         buttonChance.addListener(new AddScoreListener(Combination.CHANCE));
+        for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet())
+        {
+            System.out.println(entry.getKey() + "/" + entry.getValue());
+        }
+    }
+    
+    public void updateScoreTable() {
+        if(controller.getCurrentPlayer().getScores().get(Combination.ONE) == -1) {
+            buttonOne.setText("");
+        } else {
+            buttonOne.setText("" + controller.getCurrentPlayer().getScores().get(Combination.ONE));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.TWO) == -1) {
+            buttonTwo.setText("");
+        } else {
+            buttonTwo.setText("" + controller.getCurrentPlayer().getScores().get(Combination.TWO));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.THREE) == -1) {
+            buttonThree.setText("");
+        } else {
+            buttonThree.setText("" + controller.getCurrentPlayer().getScores().get(Combination.THREE));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.FOUR) == -1) {
+            buttonFour.setText("");
+        } else {
+            buttonFour.setText("" + controller.getCurrentPlayer().getScores().get(Combination.FOUR));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.FIVE) == -1) {
+            buttonFive.setText("");
+        } else {
+            buttonFive.setText("" + controller.getCurrentPlayer().getScores().get(Combination.FIVE));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.SIX) == -1) {
+            buttonSix.setText("");
+        } else {
+            buttonSix.setText("" + controller.getCurrentPlayer().getScores().get(Combination.SIX));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.TWOPAIRS) == -1) {
+            buttonTwoPairs.setText("");
+        } else {
+            buttonTwoPairs.setText("" + controller.getCurrentPlayer().getScores().get(Combination.TWOPAIRS));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.THREEOFAKIND) == -1) {
+            buttonThreeOfAKind.setText("");
+        } else {
+            buttonThreeOfAKind.setText("" + controller.getCurrentPlayer().getScores().get(Combination.THREEOFAKIND));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.FULLHOUSE) == -1) {
+            buttonFullHouse.setText("");
+        } else {
+            buttonFullHouse.setText("" + controller.getCurrentPlayer().getScores().get(Combination.FULLHOUSE));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.FOUROFAKIND) == -1) {
+            buttonFourOfAKind.setText("");
+        } else {
+            buttonFourOfAKind.setText("" + controller.getCurrentPlayer().getScores().get(Combination.FOUROFAKIND));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.STRAIGHT) == -1) {
+            buttonStraight.setText("");
+        } else {
+            buttonStraight.setText("" + controller.getCurrentPlayer().getScores().get(Combination.STRAIGHT));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.YAMS) == -1) {
+            buttonYams.setText("");
+        } else {
+            buttonYams.setText("" + controller.getCurrentPlayer().getScores().get(Combination.YAMS));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.PLUS) == -1) {
+            buttonPlus.setText("");
+        } else {
+            buttonPlus.setText("" + controller.getCurrentPlayer().getScores().get(Combination.PLUS));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.MINUS) == -1) {
+            buttonMinus.setText("");
+        } else {
+            buttonMinus.setText("" + controller.getCurrentPlayer().getScores().get(Combination.MINUS));
+        }
+        if(controller.getCurrentPlayer().getScores().get(Combination.CHANCE) == -1) {
+            buttonChance.setText("");
+        } else {
+            buttonChance.setText("" + controller.getCurrentPlayer().getScores().get(Combination.CHANCE));
+        }
+        
+        for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet())
+        {
+            System.out.println(entry.getKey() + "/" + entry.getValue());
+        }
     }
 
     public void confirm(final Combination c) {
@@ -219,6 +332,7 @@ public class GameScreen extends YamsScreen {
                 if (object.equals(true) && controller.getNumberTurnsLeft() > 0) {
                     controller.changePlayer(c);
                     heading.setText(controller.getCurrentPlayer().getName());
+                    updateScoreTable();
                     Dialog dialog = new Dialog("Change player", skin, "small");
                     dialog.text(
                             "Up to you to beat him,\n"

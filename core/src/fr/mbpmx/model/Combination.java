@@ -112,7 +112,6 @@ public enum Combination {
 	STRAIGHT {
 		@Override
 		public int countPoints(int[] dicesValues) {
-		    boolean bool;
 		    if (dicesValues[0] == 1) {
 		        for (int i = 1; i < 5; i++) {
 		            if (dicesValues[i] != 1) {

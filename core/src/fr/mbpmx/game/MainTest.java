@@ -1,7 +1,5 @@
 package fr.mbpmx.game;
 
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-
 import fr.mbpmx.controller.Controller;
 import fr.mbpmx.model.Combination;
 import fr.mbpmx.model.Player;

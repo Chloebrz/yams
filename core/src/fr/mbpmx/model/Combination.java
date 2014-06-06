@@ -112,12 +112,23 @@ public enum Combination {
 	STRAIGHT {
 		@Override
 		public int countPoints(int[] dicesValues) {
-			for (int i = 0; i < 4; i++) {
-				if (dicesValues[i] == 1) {
-					return 40;
-				}
-			}
-			return 0;
+		    boolean bool;
+		    if (dicesValues[0] == 1) {
+		        for (int i = 0; i < 5; i++) {
+		            if (dicesValues[i] != 1) {
+		                return 0;
+		            }
+		        }
+		    } else if (dicesValues[0] == 0) {
+		        for (int i = 1; i < 6; i++) {
+                    if (dicesValues[i] != 1) {
+                        return 0;
+                    }
+		        }
+		    } else {
+		        return 0;
+		    }
+			return 40;
 		}
 	},
 	YAMS {

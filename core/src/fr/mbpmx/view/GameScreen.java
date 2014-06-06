@@ -19,198 +19,201 @@ import fr.mbpmx.model.Combination;
 import fr.mbpmx.other.Constants;
 
 public class GameScreen extends YamsScreen {
-    private Controller controller;
+	private Controller controller;
 
-    // private Skin skinDices;
+	// private Skin skinDices;
 
-    private Table scoreTable;
-    private List<TextButton> dicesButtons;
-    private TextButton throwDices;
+	private Table scoreTable;
+	private List<TextButton> dicesButtons;
+	private TextButton throwDices;
 
-    private Table dicesTable;
+	private Table dicesTable;
 
-    private Label heading;
-    
-    private LinkedHashMap<Combination, TextButton> textButtons = new LinkedHashMap<Combination, TextButton>();
+	private Label heading;
 
-    @Override
-    public void render(float delta) {
-        super.render(delta);
+	private LinkedHashMap<Combination, TextButton> textButtons = new LinkedHashMap<Combination, TextButton>();
 
-        Table.drawDebug(stage);
-    }
+	@Override
+	public void render(float delta) {
+		super.render(delta);
 
-    @Override
-    public void resize(int width, int height) {
+		Table.drawDebug(stage);
+	}
 
-    }
+	@Override
+	public void resize(int width, int height) {
 
-    @Override
-    public void show() {
-        super.show();
-        controller = new Controller();
-        // skinDices = new Skin(Gdx.files.internal("ui/dices.json"),
-        // new TextureAtlas("ui/dices.pack"));
+	}
 
-        // Create heading (displaying the current player's name)
-        heading = new Label(controller.getCurrentPlayer().getName(), skin);
-        heading.setFontScale(2);
+	@Override
+	public void show() {
+		super.show();
+		controller = new Controller();
+		// skinDices = new Skin(Gdx.files.internal("ui/dices.json"),
+		// new TextureAtlas("ui/dices.pack"));
 
-        dicesTable = new Table();
+		// Create heading (displaying the current player's name)
+		heading = new Label(controller.getCurrentPlayer().getName(), skin,
+				"small");
+		heading.setFontScale(2);
 
-        createDices();
+		dicesTable = new Table();
 
-        throwDices = new TextButton("Jeter les dés", skin);
-        throwDices.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                controller.throwDices();
-                for(int i = 0; i < 5; i++) {
-                    dicesButtons.get(i).setText(controller.getDices().get(i).toString());
-                }
-            }
-        });
+		createDices();
 
-        // Add buttons to the table
-        for(int i = 0; i < 5; i++) {
-            dicesTable.add(dicesButtons.get(i)).spaceBottom(15).row();
-        }
-        dicesTable.add(throwDices);
+		throwDices = new TextButton("Throw the dices", skin);
+		throwDices.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				controller.throwDices();
+				for (int i = 0; i < 5; i++) {
+					dicesButtons.get(i).setText(
+							controller.getDices().get(i).toString());
+				}
+			}
+		});
 
-        scoreTable = new Table();
-        createScoresTable();
-        scoreTable.left().center();
+		// Add buttons to the table
+		for (int i = 0; i < 5; i++) {
+			dicesTable.add(dicesButtons.get(i)).spaceBottom(15).row();
+		}
+		dicesTable.add(throwDices);
 
-        table.add(heading).row();
-        table.add(scoreTable).space(75);
-        table.add(dicesTable);
-        stage.addActor(table);
+		scoreTable = new Table();
+		createScoresTable();
+		scoreTable.left().center();
 
-        addScore();
-    }
+		table.add(heading).row();
+		table.add(scoreTable).space(10);
+		table.add(dicesTable);
+		stage.addActor(table);
 
-    @Override
-    public void hide() {
+		addScore();
+	}
 
-    }
+	@Override
+	public void hide() {
 
-    @Override
-    public void pause() {
+	}
 
-    }
+	@Override
+	public void pause() {
 
-    @Override
-    public void resume() {
+	}
 
-    }
+	@Override
+	public void resume() {
 
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
+	}
 
-    public void createDices() {
-        dicesButtons = new ArrayList<TextButton>();
-        for (int i = 0; i < 5; i++) {
-            TextButton dice = new TextButton("Dice " + (i+1), skin);
-            dice.addListener(new AddDiceListener(i));
-            dicesButtons.add(dice);
-        }
-    }
+	@Override
+	public void dispose() {
+		super.dispose();
+	}
 
-    public void createScoresTable() {
-        
-        for (Combination c : Combination.class.getEnumConstants()) {
-            TextButton textButton = new TextButton("", skin, "small");
-            textButtons.put(c, textButton);
-        }
-        
-        for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet())
-        {
-            scoreTable.add(new Label(entry.getKey().toString(), skin, "small"));
-            scoreTable.add(entry.getValue()).row();
-        }
-    }
+	public void createDices() {
+		dicesButtons = new ArrayList<TextButton>();
+		for (int i = 0; i < 5; i++) {
+			TextButton dice = new TextButton("Dice " + (i + 1), skin);
+			dice.addListener(new AddDiceListener(i));
+			dicesButtons.add(dice);
+		}
+	}
 
-    public void addScore() {
-        for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet())
-        {
-            entry.getValue().addListener(new AddScoreListener(entry.getKey()));
-        }
-    }
-    
-    public void updateScoreTable() {
-        for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet())
-        {
-            if(controller.getCurrentPlayer().getScores().get(entry.getKey()) == -1) {
-                entry.getValue().setText("");
-            } else {
-                entry.getValue().setText("" + controller.getCurrentPlayer().getScores().get(entry.getKey()));
-            }
-        }
-    }
+	public void createScoresTable() {
 
-    public void confirm(final Combination c) {
-        Dialog dialog = new Dialog("Comfirm", skin, "small") {
-            @Override
-            protected void result(Object object) {
-                if (object.equals(true) && controller.getNumberTurnsLeft() > 0) {
-                    controller.changePlayer(c);
-                    heading.setText(controller.getCurrentPlayer().getName());
-                    updateScoreTable();
-                    Dialog dialog = new Dialog("Change player", skin, "small");
-                    dialog.text(
-                            "Your turn,\n"
-                                    + controller.getCurrentPlayer().getName())
-                            .button("OK").show(stage);
-                } else if(object.equals(true) && controller.getNumberTurnsLeft() == 0) {
-                    controller.addScore(c);
-                    ((Game) Gdx.app.getApplicationListener())
-                    .setScreen(new GameOverScreen());
-                }
-            }
-        };
-        dialog.text(
-                "Do you comfirm\nyou want to choose\n" + c.toString()
-                        + "\nand add " + controller.getCurrentScore(c)
-                        + " points ?").button("Yes", true);
-        dialog.button("Cancel", false).show(stage);
-    }
+		for (Combination c : Combination.class.getEnumConstants()) {
+			TextButton textButton = new TextButton("  ", skin, "small");
+			textButtons.put(c, textButton);
+		}
 
-    public class AddScoreListener extends ClickListener {
-        Combination combination;
+		for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet()) {
+			scoreTable.add(new Label(entry.getKey().toString(), skin, "small"));
+			scoreTable.add(entry.getValue()).spaceBottom(5).row();
+		}
+	}
 
-        public AddScoreListener(Combination combination) {
-            super();
-            this.combination = combination;
-        }
+	public void addScore() {
+		for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet()) {
+			entry.getValue().addListener(new AddScoreListener(entry.getKey()));
+		}
+	}
 
-        @Override
-        public void clicked(InputEvent event, float x, float y) {
-            if (controller.getCurrentPlayer().getScores().get(combination) == -1
-                    && controller.getThrowsLeft() < Constants.NUMBER_OF_THROWS) {
-                confirm(combination);
-            }
-        }
-    }
+	public void updateScoreTable() {
+		for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet()) {
+			if (controller.getCurrentPlayer().getScores().get(entry.getKey()) == -1) {
+				entry.getValue().setText("  ");
+			} else {
+				entry.getValue().setText(
+						""
+								+ controller.getCurrentPlayer().getScores()
+										.get(entry.getKey()));
+			}
+		}
+	}
 
-    public class AddDiceListener extends ClickListener {
-        int diceNumber;
+	public void confirm(final Combination c) {
+		Dialog dialog = new Dialog("Comfirm", skin, "small") {
+			@Override
+			protected void result(Object object) {
+				if (object.equals(true) && controller.getNumberTurnsLeft() > 0) {
+					controller.changePlayer(c);
+					heading.setText(controller.getCurrentPlayer().getName());
+					updateScoreTable();
+					Dialog dialog = new Dialog("Change player", skin, "small");
+					dialog.text(
+							"Your turn,\n"
+									+ controller.getCurrentPlayer().getName())
+							.button("OK").show(stage);
+				} else if (object.equals(true)
+						&& controller.getNumberTurnsLeft() == 0) {
+					controller.addScore(c);
+					((Game) Gdx.app.getApplicationListener())
+							.setScreen(new GameOverScreen());
+				}
+			}
+		};
+		dialog.text(
+				"Do you comfirm\nyou want to choose\n" + c.toString()
+						+ "\nand add " + controller.getCurrentScore(c)
+						+ " points ?").button("Yes", true);
+		dialog.button("Cancel", false).show(stage);
+	}
 
-        public AddDiceListener(int diceNumber) {
-            this.diceNumber = diceNumber;
-        }
+	public class AddScoreListener extends ClickListener {
+		Combination combination;
 
-        @Override
-        public void clicked(InputEvent event, float x, float y) {
-            if (controller.getThrowsLeft() < Constants.NUMBER_OF_THROWS) {
-                controller
-                        .getDices()
-                        .get(diceNumber)
-                        .setToThrow(
-                                !controller.getDices().get(diceNumber)
-                                        .isToThrow());
-            }
-        }
-    }
+		public AddScoreListener(Combination combination) {
+			super();
+			this.combination = combination;
+		}
+
+		@Override
+		public void clicked(InputEvent event, float x, float y) {
+			if (controller.getCurrentPlayer().getScores().get(combination) == -1
+					&& controller.getThrowsLeft() < Constants.NUMBER_OF_THROWS) {
+				confirm(combination);
+			}
+		}
+	}
+
+	public class AddDiceListener extends ClickListener {
+		int diceNumber;
+
+		public AddDiceListener(int diceNumber) {
+			this.diceNumber = diceNumber;
+		}
+
+		@Override
+		public void clicked(InputEvent event, float x, float y) {
+			if (controller.getThrowsLeft() < Constants.NUMBER_OF_THROWS) {
+				controller
+						.getDices()
+						.get(diceNumber)
+						.setToThrow(
+								!controller.getDices().get(diceNumber)
+										.isToThrow());
+			}
+		}
+	}
 }

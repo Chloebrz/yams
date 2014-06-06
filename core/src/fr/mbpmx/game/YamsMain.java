@@ -3,7 +3,7 @@ package fr.mbpmx.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
-import fr.mbpmx.view.MainMenuScreen;
+import fr.mbpmx.view.YamsSplash;
 
 public class YamsMain extends Game {
 	public final static String TITLE = "Yam's", VERSION = "1";
@@ -11,7 +11,7 @@ public class YamsMain extends Game {
 	@Override
 	public void create() {
 		((Game) Gdx.app.getApplicationListener())
-				.setScreen(new MainMenuScreen());
+				.setScreen(new YamsSplash());
 	}
 
 	@Override

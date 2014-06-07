@@ -171,6 +171,20 @@ public class GameScreen extends YamsScreen {
 					controller.changePlayer(c);
 					heading.setText(controller.getCurrentPlayer().getName());
 					updateScoreTable();
+
+					for (int i = 0; i < 5; i++) {
+						dicesButtons.get(i)
+								.setStyle(
+										skinDices
+												.get("dice"
+														+ controller.getDices()
+																.get(i)
+																.getValue()
+																.getValue()
+														+ "true",
+														TextButtonStyle.class));
+					}
+
 					Dialog dialog = new Dialog("Change player", skin, "small");
 					dialog.text(
 							"Your turn,\n"

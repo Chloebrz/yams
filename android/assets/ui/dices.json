@@ -8,11 +8,17 @@
 		black16: { file: font/black16.fnt }
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-		dice1: { up: dice1up, down: dice1down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
-		dice2: { up: dice2up, down: dice2down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
-		dice3: { up: dice3up, down: dice3down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
-		dice4: { up: dice4up, down: dice4down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
-		dice5: { up: dice5up, down: dice5down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
-		dice6: { up: dice6up, down: dice6down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 }
+		dice1true: { up: dice1up, down: dice1down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
+		dice2true: { up: dice2up, down: dice2down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
+		dice3true: { up: dice3up, down: dice3down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
+		dice4true: { up: dice4up, down: dice4down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
+		dice5true: { up: dice5up, down: dice5down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
+		dice6true: { up: dice6up, down: dice6down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
+		dice1false: { up: dice1down, down: dice1up, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
+		dice2false: { up: dice2down, down: dice2up, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
+		dice3false: { up: dice3down, down: dice3up, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
+		dice4false: { up: dice4down, down: dice4up, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
+		dice5false: { up: dice5down, down: dice5up, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
+		dice6false: { up: dice6down, down: dice6up, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 }
 	}
 }

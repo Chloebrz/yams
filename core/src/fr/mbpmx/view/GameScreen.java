@@ -72,12 +72,12 @@ public class GameScreen extends YamsScreen {
 			public void clicked(InputEvent event, float x, float y) {
 				controller.throwDices();
 				for (int i = 0; i < 5; i++) {
-					dicesButtons.get(i)
-							.setStyle(
-									skinDices.get("dice"
-											+ controller.getDices().get(i)
-													.getValue().getValue(),
-											TextButtonStyle.class));
+					dicesButtons.get(i).setStyle(
+							skinDices.get("dice"
+									+ controller.getDices().get(i).getValue()
+											.getValue()
+									+ controller.getDices().get(i).isToThrow(),
+									TextButtonStyle.class));
 				}
 			}
 		});
@@ -125,7 +125,7 @@ public class GameScreen extends YamsScreen {
 	public void createDices() {
 		dicesButtons = new ArrayList<TextButton>();
 		for (int i = 0; i < 5; i++) {
-			TextButton dice = new TextButton("", skinDices, "dice1");
+			TextButton dice = new TextButton("", skinDices, "dice1true");
 			dice.addListener(new AddDiceListener(i));
 			dicesButtons.add(dice);
 		}
@@ -224,6 +224,14 @@ public class GameScreen extends YamsScreen {
 						.setToThrow(
 								!controller.getDices().get(diceNumber)
 										.isToThrow());
+				dicesButtons.get(diceNumber).setStyle(
+						skinDices.get(
+								"dice"
+										+ controller.getDices().get(diceNumber)
+												.getValue().getValue()
+										+ controller.getDices().get(diceNumber)
+												.isToThrow(),
+								TextButtonStyle.class));
 			}
 		}
 	}

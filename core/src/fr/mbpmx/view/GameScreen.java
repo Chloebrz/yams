@@ -31,7 +31,7 @@ public class GameScreen extends YamsScreen {
 
 	private Label heading;
 
-	private LinkedHashMap<Combination, TextButton> textButtons = new LinkedHashMap<Combination, TextButton>();
+	private LinkedHashMap<Combination, TextButton> textButtons;
 
 	@Override
 	public void render(float delta) {
@@ -49,6 +49,7 @@ public class GameScreen extends YamsScreen {
 	public void show() {
 		super.show();
 		controller = new Controller();
+		textButtons  = new LinkedHashMap<Combination, TextButton>();
 		// skinDices = new Skin(Gdx.files.internal("ui/dices.json"),
 		// new TextureAtlas("ui/dices.pack"));
 

@@ -7,11 +7,14 @@ import java.util.Map;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import fr.mbpmx.controller.Controller;
@@ -21,7 +24,7 @@ import fr.mbpmx.other.Constants;
 public class GameScreen extends YamsScreen {
 	private Controller controller;
 
-	// private Skin skinDices;
+	private Skin skinDices;
 
 	private Table scoreTable;
 	private List<TextButton> dicesButtons;
@@ -48,10 +51,12 @@ public class GameScreen extends YamsScreen {
 	@Override
 	public void show() {
 		super.show();
+
 		controller = new Controller();
-		textButtons  = new LinkedHashMap<Combination, TextButton>();
-		// skinDices = new Skin(Gdx.files.internal("ui/dices.json"),
-		// new TextureAtlas("ui/dices.pack"));
+		textButtons = new LinkedHashMap<Combination, TextButton>();
+
+		skinDices = new Skin(Gdx.files.internal("ui/dices.json"),
+				new TextureAtlas("ui/dices.pack"));
 
 		// Create heading (displaying the current player's name)
 		heading = new Label(controller.getCurrentPlayer().getName(), skin,
@@ -59,7 +64,6 @@ public class GameScreen extends YamsScreen {
 		heading.setFontScale(2);
 
 		dicesTable = new Table();
-
 		createDices();
 
 		throwDices = new TextButton("Throw the dices", skin);
@@ -68,16 +72,22 @@ public class GameScreen extends YamsScreen {
 			public void clicked(InputEvent event, float x, float y) {
 				controller.throwDices();
 				for (int i = 0; i < 5; i++) {
-					dicesButtons.get(i).setText(
-							controller.getDices().get(i).toString());
+					dicesButtons.get(i)
+							.setStyle(
+									skinDices.get("dice"
+											+ controller.getDices().get(i)
+													.getValue().getValue(),
+											TextButtonStyle.class));
 				}
 			}
 		});
 
 		// Add buttons to the table
-		for (int i = 0; i < 5; i++) {
-			dicesTable.add(dicesButtons.get(i)).spaceBottom(15).row();
+		for (int i = 0; i < 3; i += 2) {
+			dicesTable.add(dicesButtons.get(i));
+			dicesTable.add(dicesButtons.get(i + 1)).spaceBottom(15).row();
 		}
+		dicesTable.add(dicesButtons.get(4)).center().spaceBottom(30).row();
 		dicesTable.add(throwDices);
 
 		scoreTable = new Table();
@@ -115,7 +125,7 @@ public class GameScreen extends YamsScreen {
 	public void createDices() {
 		dicesButtons = new ArrayList<TextButton>();
 		for (int i = 0; i < 5; i++) {
-			TextButton dice = new TextButton("Dice " + (i + 1), skin);
+			TextButton dice = new TextButton("", skinDices, "dice1");
 			dice.addListener(new AddDiceListener(i));
 			dicesButtons.add(dice);
 		}

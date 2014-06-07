@@ -44,7 +44,7 @@ public enum Combination {
 			if (dicesValues[1] >= 4) {
 				return 25;
 			}
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 6; i++) {
 				if (dicesValues[i] >= 2) {
 					pairs++;
 				}

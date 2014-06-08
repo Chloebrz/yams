@@ -84,7 +84,6 @@ public class Controller {
     public void addScore(Combination combination) {
         currentPlayer.setScore(combination,
                 combination.countPoints(numberOfEachValue));
-        numberTurnsLeft--;
     }
 
     public int getCurrentScore(Combination combination) {

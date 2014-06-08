@@ -34,6 +34,11 @@ public class Player {
 		sum += scores.get(Combination.FOUR);
 		sum += scores.get(Combination.FIVE);
 		sum += scores.get(Combination.SIX);
+
+		if (sum >= 63) {
+			sum += 63;
+		}
+
 		sum += scores.get(Combination.TWOPAIRS);
 		sum += scores.get(Combination.THREEOFAKIND);
 		sum += scores.get(Combination.FULLHOUSE);

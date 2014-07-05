@@ -28,7 +28,7 @@ public class GameScreen extends YamsScreen {
 
 	private Table scoreTable;
 	private List<TextButton> dicesButtons;
-	private TextButton throwDices;
+	private TextButton throwDices, exit;
 
 	private Table dicesTable;
 
@@ -82,6 +82,14 @@ public class GameScreen extends YamsScreen {
 			}
 		});
 
+		exit = new TextButton("Exit", skin, "small");
+		exit.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				Gdx.app.exit();
+			}
+		});
+
 		// Add buttons to the table
 		for (int i = 0; i < 3; i += 2) {
 			dicesTable.add(dicesButtons.get(i));
@@ -89,6 +97,7 @@ public class GameScreen extends YamsScreen {
 		}
 		dicesTable.add(dicesButtons.get(4)).center().spaceBottom(30).row();
 		dicesTable.add(throwDices);
+		dicesTable.add(exit);
 
 		scoreTable = new Table();
 		createScoresTable();

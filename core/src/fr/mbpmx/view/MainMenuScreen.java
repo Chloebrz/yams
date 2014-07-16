@@ -8,8 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import fr.mbpmx.game.YamsMain;
-import fr.mbpmx.model.Player;
-import fr.mbpmx.other.Constants;
 
 public class MainMenuScreen extends YamsScreen {
 	private TextButton buttonNewGame, buttonSettings, buttonInstructions,
@@ -38,12 +36,8 @@ public class MainMenuScreen extends YamsScreen {
 		buttonNewGame.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				if (!Constants.playersInstantiated) {
-					Constants.p1 = new Player("Player 1");
-					Constants.p2 = new Player("Player 2");
-				}
 				((Game) Gdx.app.getApplicationListener())
-						.setScreen(new GameScreen());
+						.setScreen(new NewGameScreen());
 			}
 		});
 		buttonNewGame.pad(15);

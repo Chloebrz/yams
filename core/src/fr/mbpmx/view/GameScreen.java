@@ -32,7 +32,7 @@ public class GameScreen extends YamsScreen {
 
 	private Table dicesTable;
 
-	private Label heading;
+	private Label heading, scores;
 
 	private LinkedHashMap<Combination, TextButton> textButtons;
 
@@ -89,6 +89,11 @@ public class GameScreen extends YamsScreen {
 				Gdx.app.exit();
 			}
 		});
+
+		scores = new Label("", skin);
+		if (Constants.DISPLAY_SCORES) {
+			dicesTable.add(scores).row();
+		}
 
 		// Add buttons to the table
 		for (int i = 0; i < 3; i += 2) {
@@ -199,6 +204,9 @@ public class GameScreen extends YamsScreen {
 							"Your turn,\n"
 									+ controller.getCurrentPlayer().getName())
 							.button("OK").show(stage);
+					scores.setText(""
+							+ controller.getCurrentPlayer().getTotalScore());
+
 				} else if (object.equals(true)
 						&& controller.getNumberTurnsLeft() == 0) {
 					controller.addScore(c);

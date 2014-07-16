@@ -1,5 +1,7 @@
 package fr.mbpmx.model;
 
+import java.util.ArrayList;
+
 public class Player {
 	private String name;
 	private ScoreTable scores;
@@ -27,29 +29,28 @@ public class Player {
 
 	public int getTotalScore() {
 		int sum = 0;
-
-		sum += scores.get(Combination.ONE);
-		sum += scores.get(Combination.TWO);
-		sum += scores.get(Combination.THREE);
-		sum += scores.get(Combination.FOUR);
-		sum += scores.get(Combination.FIVE);
-		sum += scores.get(Combination.SIX);
+		
+		Combination[] combinations = Combination.class.getEnumConstants();
+		for(int i = 0; i < 6; i++) {
+		    if(scores.get(combinations[i]) >= 0) {
+		        sum += scores.get(combinations[i]);
+		    }
+		}
 
 		if (sum >= 63) {
 			sum += 63;
 		}
-
-		sum += scores.get(Combination.TWOPAIRS);
-		sum += scores.get(Combination.THREEOFAKIND);
-		sum += scores.get(Combination.FULLHOUSE);
-		sum += scores.get(Combination.FOUROFAKIND);
-		sum += scores.get(Combination.STRAIGHT);
-		sum += scores.get(Combination.YAMS);
-		sum += scores.get(Combination.CHANCE);
-		// TODO Reduce this method length.
+		
+		for(int i = 6; i < 12; i++) {
+		    if(scores.get(combinations[i]) >= 0) {
+                sum += scores.get(combinations[i]);
+            }
+		}
 
 		sum += (scores.get(Combination.PLUS) - scores.get(Combination.MINUS))
 				* scores.get(Combination.ONE);
+		
+		sum += scores.get(Combination.CHANCE);
 
 		return sum;
 	}

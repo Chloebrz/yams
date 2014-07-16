@@ -63,6 +63,8 @@ public class GameScreen extends YamsScreen {
 				"small");
 		heading.setFontScale(2);
 
+		scores = new Label("", skin);
+
 		dicesTable = new Table();
 		createDices();
 
@@ -90,12 +92,10 @@ public class GameScreen extends YamsScreen {
 			}
 		});
 
-		scores = new Label("", skin);
+		// Add buttons to the table
 		if (Constants.DISPLAY_SCORES) {
 			dicesTable.add(scores).row();
 		}
-
-		// Add buttons to the table
 		for (int i = 0; i < 3; i += 2) {
 			dicesTable.add(dicesButtons.get(i));
 			dicesTable.add(dicesButtons.get(i + 1)).spaceBottom(15).row();
@@ -200,6 +200,7 @@ public class GameScreen extends YamsScreen {
 					}
 
 					Dialog dialog = new Dialog("Change player", skin, "small");
+					// dialog.setBackground(background);
 					dialog.text(
 							"Your turn,\n"
 									+ controller.getCurrentPlayer().getName())

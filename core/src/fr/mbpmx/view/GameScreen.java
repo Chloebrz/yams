@@ -88,7 +88,18 @@ public class GameScreen extends YamsScreen {
 		exit.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.exit();
+				Dialog dialog = new Dialog("Comfirm", skin, "small") {
+					@Override
+					protected void result(Object object) {
+						if (object.equals(true)) {
+							// TODO save the scores in the database
+						}
+						Gdx.app.exit();
+					}
+				};
+				dialog.text("Do you want to save the game?")
+						.button("Yes", true);
+				dialog.button("No", false).show(stage);
 			}
 		});
 
@@ -219,7 +230,7 @@ public class GameScreen extends YamsScreen {
 		dialog.text(
 				"Do you comfirm\nyou want to choose\n" + c.toString()
 						+ "\nand add " + controller.getCurrentScore(c)
-						+ " points ?").button("Yes", true);
+						+ " points?").button("Yes", true);
 		dialog.button("Cancel", false).show(stage);
 	}
 

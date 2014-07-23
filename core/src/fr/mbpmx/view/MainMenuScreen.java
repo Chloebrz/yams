@@ -7,11 +7,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import fr.mbpmx.database.ScoresDAO;
 import fr.mbpmx.game.YamsMain;
+import fr.mbpmx.model.Player;
+import fr.mbpmx.other.Constants;
 
 public class MainMenuScreen extends YamsScreen {
 	private TextButton buttonNewGame, buttonSettings, buttonInstructions,
-			buttonExit;
+			buttonExit, buttonResume;
+
+	private ScoresDAO scoresDAO;
 
 	@Override
 	public void render(float delta) {
@@ -41,6 +46,21 @@ public class MainMenuScreen extends YamsScreen {
 			}
 		});
 		buttonNewGame.pad(15);
+
+		scoresDAO = new ScoresDAO();
+		if (scoresDAO.exist()) {
+			buttonResume = new TextButton("Resume", skin);
+			buttonResume.addListener(new ClickListener() {
+				@Override
+				public void clicked(InputEvent event, float x, float y) {
+					// TODO add the players' names and their scores
+//					Constants.p1 = new Player();
+//					Constants.p2 = new Player();
+					((Game) Gdx.app.getApplicationListener())
+							.setScreen(new GameScreen());
+				}
+			});
+		}
 
 		buttonSettings = new TextButton("Settings", skin);
 		buttonSettings.addListener(new ClickListener() {

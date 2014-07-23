@@ -102,10 +102,11 @@ public class GameScreen extends YamsScreen {
 							scoresDAO.insert(Constants.p2);
 							Gdx.app.log("DatabaseTest", "player 2 added");
 
+						} else if (object.equals(false)) {
+							scoresDAO.delete();
+							Gdx.app.log("DatabaseTest", "table deleted");
 						}
 						scoresDAO.getScore();
-						scoresDAO.delete();
-						Gdx.app.log("DatabaseTest", "table deleted");
 						Gdx.app.exit();
 					}
 				};
@@ -234,6 +235,8 @@ public class GameScreen extends YamsScreen {
 				} else if (object.equals(true)
 						&& controller.getNumberTurnsLeft() == 0) {
 					controller.addScore(c);
+					scoresDAO.delete();
+					Gdx.app.log("DatabaseTest", "table deleted");
 					((Game) Gdx.app.getApplicationListener())
 							.setScreen(new GameOverScreen());
 				}

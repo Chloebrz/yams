@@ -77,18 +77,18 @@ public class ScoresDAO {
 					+ COMBINATION_FOUROFAKIND + "', '" + COMBINATION_STRAIGHT
 					+ "', '" + COMBINATION_YAMS + "', '" + COMBINATION_PLUS
 					+ "', '" + COMBINATION_MINUS + "', '" + COMBINATION_CHANCE
-					+ "') VALUES ('" + p.getName() + "', "
-					+ s.get(Combination.ONE) + "', " + s.get(Combination.TWO)
-					+ "', " + s.get(Combination.THREE) + "', "
-					+ s.get(Combination.FOUR) + "', " + s.get(Combination.FIVE)
-					+ "', " + s.get(Combination.SIX) + "', "
-					+ s.get(Combination.TWOPAIRS) + "', "
-					+ s.get(Combination.THREEOFAKIND) + "', "
-					+ s.get(Combination.FULLHOUSE) + "', "
-					+ s.get(Combination.FOUROFAKIND) + "', "
-					+ s.get(Combination.STRAIGHT) + "', "
-					+ s.get(Combination.YAMS) + "', " + s.get(Combination.PLUS)
-					+ "', " + s.get(Combination.MINUS) + "', "
+					+ "') VALUES (" + p.getName() + "', '"
+					+ s.get(Combination.ONE) + "', '" + s.get(Combination.TWO)
+					+ "', '" + s.get(Combination.THREE) + "', '"
+					+ s.get(Combination.FOUR) + "', '" + s.get(Combination.FIVE)
+					+ "', '" + s.get(Combination.SIX) + "', '"
+					+ s.get(Combination.TWOPAIRS) + "', '"
+					+ s.get(Combination.THREEOFAKIND) + "', '"
+					+ s.get(Combination.FULLHOUSE) + "', '"
+					+ s.get(Combination.FOUROFAKIND) + "', '"
+					+ s.get(Combination.STRAIGHT) + "', '"
+					+ s.get(Combination.YAMS) + "', '" + s.get(Combination.PLUS)
+					+ "', '" + s.get(Combination.MINUS) + "', '"
 					+ s.get(Combination.CHANCE) + "')");
 		} catch (SQLiteGdxException e) {
 			e.printStackTrace();
@@ -122,5 +122,10 @@ public class ScoresDAO {
 		} catch (SQLiteGdxException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public boolean exist() {
+		
+		return false;
 	}
 }

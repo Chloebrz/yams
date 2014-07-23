@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import fr.mbpmx.controller.Controller;
+import fr.mbpmx.database.ScoresDAO;
 import fr.mbpmx.model.Combination;
 import fr.mbpmx.other.Constants;
 
@@ -28,13 +29,15 @@ public class GameScreen extends YamsScreen {
 
 	private Table scoreTable;
 	private List<TextButton> dicesButtons;
-	private TextButton throwDices, exit;
+	private TextButton buttonThrowDices, buttonExit;
 
 	private Table dicesTable;
 
 	private Label heading, scores;
 
 	private LinkedHashMap<Combination, TextButton> textButtons;
+
+	private ScoresDAO scoresDAO;
 
 	@Override
 	public void render(float delta) {
@@ -68,8 +71,8 @@ public class GameScreen extends YamsScreen {
 		dicesTable = new Table();
 		createDices();
 
-		throwDices = new TextButton("Throw the dices", skin);
-		throwDices.addListener(new ClickListener() {
+		buttonThrowDices = new TextButton("Throw the dices", skin);
+		buttonThrowDices.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				controller.throwDices();
@@ -84,16 +87,25 @@ public class GameScreen extends YamsScreen {
 			}
 		});
 
-		exit = new TextButton("Exit", skin, "small");
-		exit.addListener(new ClickListener() {
+		scoresDAO = new ScoresDAO();
+
+		buttonExit = new TextButton("Exit", skin, "small");
+		buttonExit.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				Dialog dialog = new Dialog("Comfirm", skin, "small") {
 					@Override
 					protected void result(Object object) {
 						if (object.equals(true)) {
-							// TODO save the scores in the database
+							scoresDAO.insert(Constants.p1);
+							Gdx.app.log("DatabaseTest", "player 1 added");
+							scoresDAO.insert(Constants.p2);
+							Gdx.app.log("DatabaseTest", "player 2 added");
+
 						}
+						scoresDAO.getScore();
+						scoresDAO.delete();
+						Gdx.app.log("DatabaseTest", "table deleted");
 						Gdx.app.exit();
 					}
 				};
@@ -112,8 +124,8 @@ public class GameScreen extends YamsScreen {
 			dicesTable.add(dicesButtons.get(i + 1)).spaceBottom(15).row();
 		}
 		dicesTable.add(dicesButtons.get(4)).center().spaceBottom(30).row();
-		dicesTable.add(throwDices);
-		dicesTable.add(exit);
+		dicesTable.add(buttonThrowDices);
+		dicesTable.add(buttonExit);
 
 		scoreTable = new Table();
 		createScoresTable();

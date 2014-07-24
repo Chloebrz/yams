@@ -106,7 +106,6 @@ public class GameScreen extends YamsScreen {
 							scoresDAO.delete();
 							Gdx.app.log("DatabaseTest", "table deleted");
 						}
-						scoresDAO.getScore();
 						Gdx.app.exit();
 					}
 				};

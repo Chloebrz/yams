@@ -1,5 +1,8 @@
 package fr.mbpmx.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -48,19 +51,7 @@ public class MainMenuScreen extends YamsScreen {
 		buttonNewGame.pad(15);
 
 		scoresDAO = new ScoresDAO();
-		if (scoresDAO.exist()) {
-			buttonResume = new TextButton("Resume", skin);
-			buttonResume.addListener(new ClickListener() {
-				@Override
-				public void clicked(InputEvent event, float x, float y) {
-					// TODO add the players' names and their scores
-//					Constants.p1 = new Player();
-//					Constants.p2 = new Player();
-					((Game) Gdx.app.getApplicationListener())
-							.setScreen(new GameScreen());
-				}
-			});
-		}
+		Gdx.app.log("DatabaseTest", "" + scoresDAO.exist());
 
 		buttonSettings = new TextButton("Settings", skin);
 		buttonSettings.addListener(new ClickListener() {
@@ -93,6 +84,30 @@ public class MainMenuScreen extends YamsScreen {
 
 		table.add(heading).spaceBottom(75).row();
 		table.add(buttonNewGame).spaceBottom(15).row();
+		
+		if (scoresDAO.exist()) {
+			buttonResume = new TextButton("Resume", skin);
+			buttonResume.addListener(new ClickListener() {
+				@Override
+				public void clicked(InputEvent event, float x, float y) {
+					// Add the players' names and their scores to continue the
+					// game
+					List<String> playersNames = new ArrayList<String>();
+					playersNames = scoresDAO.getPlayers();
+
+					Constants.p1 = new Player(playersNames.get(0));
+					Constants.p2 = new Player(playersNames.get(1));
+
+					scoresDAO.setScores(Constants.p1);
+					scoresDAO.setScores(Constants.p2);
+
+					((Game) Gdx.app.getApplicationListener())
+							.setScreen(new GameScreen());
+				}
+			});
+			table.add(buttonResume).spaceBottom(15).row();
+		}
+		
 		table.add(buttonSettings).spaceBottom(15).row();
 		table.add(buttonInstructions).spaceBottom(15).row();
 		table.add(buttonExit);

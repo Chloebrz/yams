@@ -1,5 +1,8 @@
 package fr.mbpmx.database;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.sql.Database;
 import com.badlogic.gdx.sql.DatabaseCursor;
@@ -77,18 +80,19 @@ public class ScoresDAO {
 					+ COMBINATION_FOUROFAKIND + "', '" + COMBINATION_STRAIGHT
 					+ "', '" + COMBINATION_YAMS + "', '" + COMBINATION_PLUS
 					+ "', '" + COMBINATION_MINUS + "', '" + COMBINATION_CHANCE
-					+ "') VALUES (" + p.getName() + "', '"
+					+ "') VALUES ('" + p.getName() + "', '"
 					+ s.get(Combination.ONE) + "', '" + s.get(Combination.TWO)
 					+ "', '" + s.get(Combination.THREE) + "', '"
-					+ s.get(Combination.FOUR) + "', '" + s.get(Combination.FIVE)
-					+ "', '" + s.get(Combination.SIX) + "', '"
-					+ s.get(Combination.TWOPAIRS) + "', '"
+					+ s.get(Combination.FOUR) + "', '"
+					+ s.get(Combination.FIVE) + "', '" + s.get(Combination.SIX)
+					+ "', '" + s.get(Combination.TWOPAIRS) + "', '"
 					+ s.get(Combination.THREEOFAKIND) + "', '"
 					+ s.get(Combination.FULLHOUSE) + "', '"
 					+ s.get(Combination.FOUROFAKIND) + "', '"
 					+ s.get(Combination.STRAIGHT) + "', '"
-					+ s.get(Combination.YAMS) + "', '" + s.get(Combination.PLUS)
-					+ "', '" + s.get(Combination.MINUS) + "', '"
+					+ s.get(Combination.YAMS) + "', '"
+					+ s.get(Combination.PLUS) + "', '"
+					+ s.get(Combination.MINUS) + "', '"
 					+ s.get(Combination.CHANCE) + "')");
 		} catch (SQLiteGdxException e) {
 			e.printStackTrace();
@@ -103,19 +107,6 @@ public class ScoresDAO {
 
 	}
 
-	public void getScore() {
-		DatabaseCursor cursor = null;
-
-		try {
-			cursor = dbHandler.rawQuery("SELECT * FROM " + TABLE_NAME);
-		} catch (SQLiteGdxException e) {
-			e.printStackTrace();
-		}
-		while (cursor.next()) {
-			Gdx.app.log("Scores saved?", String.valueOf(cursor.getInt(2)));
-		}
-	}
-
 	public void delete() {
 		try {
 			dbHandler.execSQL(DATABASE_DELETE);
@@ -125,7 +116,54 @@ public class ScoresDAO {
 	}
 
 	public boolean exist() {
-		
-		return false;
+		DatabaseCursor cursor = null;
+
+		try {
+			cursor = dbHandler.rawQuery("SELECT * FROM " + TABLE_NAME);
+		} catch (SQLiteGdxException e) {
+			e.printStackTrace();
+		}
+		return cursor.next();
+	}
+
+	public List<String> getPlayers() {
+		DatabaseCursor cursor = null;
+		ArrayList<String> playerList = new ArrayList<String>();
+
+		try {
+			cursor = dbHandler.rawQuery("SELECT * " + " FROM " + TABLE_NAME);
+		} catch (SQLiteGdxException e) {
+			e.printStackTrace();
+		}
+		while (cursor.next()) {
+			playerList.add(String.valueOf(cursor.getString(1)));
+		}
+		return playerList;
+	}
+
+	public void setScores(Player p) {
+		DatabaseCursor cursor = null;
+		try {
+			cursor = dbHandler.rawQuery("SELECT * " + " FROM " + TABLE_NAME
+					+ " WHERE " + PLAYER + " = " + p.getName());
+		} catch (SQLiteGdxException e) {
+			e.printStackTrace();
+		}
+
+		p.setScore(Combination.ONE, cursor.getInt(2));
+		p.setScore(Combination.TWO, cursor.getInt(3));
+		p.setScore(Combination.THREE, cursor.getInt(4));
+		p.setScore(Combination.FOUR, cursor.getInt(5));
+		p.setScore(Combination.FIVE, cursor.getInt(6));
+		p.setScore(Combination.SIX, cursor.getInt(7));
+		p.setScore(Combination.TWOPAIRS, cursor.getInt(8));
+		p.setScore(Combination.THREEOFAKIND, cursor.getInt(9));
+		p.setScore(Combination.FULLHOUSE, cursor.getInt(10));
+		p.setScore(Combination.FOUROFAKIND, cursor.getInt(11));
+		p.setScore(Combination.STRAIGHT, cursor.getInt(12));
+		p.setScore(Combination.YAMS, cursor.getInt(13));
+		p.setScore(Combination.PLUS, cursor.getInt(14));
+		p.setScore(Combination.MINUS, cursor.getInt(15));
+		p.setScore(Combination.CHANCE, cursor.getInt(16));
 	}
 }

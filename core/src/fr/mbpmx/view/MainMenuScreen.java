@@ -34,16 +34,19 @@ public class MainMenuScreen extends YamsScreen {
 	@Override
 	public void show() {
 		super.show();
+		
+		scoresDAO = new ScoresDAO();
 
 		// Creating heading
 		Label heading = new Label(YamsMain.TITLE, skin, "big");
 		heading.setFontScale(2);
 
-		// Creation of the buttons
 		buttonNewGame = new TextButton("New Game", skin);
 		buttonNewGame.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				scoresDAO.delete();
+				
 				((Game) Gdx.app.getApplicationListener())
 						.setScreen(new NewGameScreen());
 			}
@@ -79,11 +82,9 @@ public class MainMenuScreen extends YamsScreen {
 		});
 		buttonExit.pad(10);
 
-		table.add(heading).spaceBottom(75).row();
+		table.add(heading).spaceBottom(50).row();
 		table.add(buttonNewGame).spaceBottom(15).row();
 		
-		scoresDAO = new ScoresDAO();
-
 		if (scoresDAO.exist()) {
 			buttonResume = new TextButton("Resume", skin);
 			buttonResume.addListener(new ClickListener() {
@@ -104,6 +105,7 @@ public class MainMenuScreen extends YamsScreen {
 							.setScreen(new GameScreen());
 				}
 			});
+			buttonResume.pad(10);
 			table.add(buttonResume).spaceBottom(15).row();
 		}
 		

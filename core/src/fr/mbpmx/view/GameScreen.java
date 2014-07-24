@@ -136,6 +136,7 @@ public class GameScreen extends YamsScreen {
 		table.add(dicesTable);
 		stage.addActor(table);
 
+		updateScoreTable();
 		addScore();
 	}
 

@@ -7,12 +7,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import fr.mbpmx.database.BestScoresDAO;
 import fr.mbpmx.game.YamsMain;
 import fr.mbpmx.other.Constants;
 
 public class GameOverScreen extends YamsScreen {
 	private TextButton buttonMenu, buttonExit;
 	private String playerOneScore, playerTwoScore, winner;
+	private BestScoresDAO bestScoresDAO;
 
 	@Override
 	public void render(float delta) {
@@ -28,6 +30,8 @@ public class GameOverScreen extends YamsScreen {
 	public void show() {
 		super.show();
 
+		bestScoresDAO = new BestScoresDAO();
+
 		Label heading = new Label(YamsMain.TITLE, skin);
 		heading.setFontScale(2);
 
@@ -39,10 +43,14 @@ public class GameOverScreen extends YamsScreen {
 
 		if (Constants.p1.getTotalScore() < Constants.p2.getTotalScore()) {
 			winner = "And the winner is\n" + Constants.p2.getName() + "!";
+			bestScoresDAO.insert(Constants.p2);
 		} else if (Constants.p1.getTotalScore() > Constants.p2.getTotalScore()) {
 			winner = "And the winner is\n" + Constants.p1.getName() + "!";
+			bestScoresDAO.insert(Constants.p1);
 		} else {
 			winner = "Wahou! You have exactly\nthe same score!";
+			bestScoresDAO.insert(Constants.p1);
+			bestScoresDAO.insert(Constants.p2);
 		}
 
 		// Creation of the buttons

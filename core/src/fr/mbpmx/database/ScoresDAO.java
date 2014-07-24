@@ -71,7 +71,7 @@ public class ScoresDAO {
 	public void insert(Player p) {
 		ScoreTable s = p.getScores();
 		try {
-			dbHandler.execSQL("INSERT INTO scores ('" + PLAYER + "', '"
+			dbHandler.execSQL("INSERT INTO " + TABLE_NAME + " ('" + PLAYER + "', '"
 					+ COMBINATION_ONE + "', '" + COMBINATION_TWO + "', '"
 					+ COMBINATION_THREE + "', '" + COMBINATION_FOUR + "', '"
 					+ COMBINATION_FIVE + "', '" + COMBINATION_SIX + "', '"

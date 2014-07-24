@@ -58,3 +58,6 @@ nb-configuration.xml
 
 .gradle
 build/
+
+## Unknown folder
+desktop/yams

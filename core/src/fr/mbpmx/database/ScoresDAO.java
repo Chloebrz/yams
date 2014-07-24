@@ -13,6 +13,13 @@ import fr.mbpmx.model.Combination;
 import fr.mbpmx.model.Player;
 import fr.mbpmx.model.ScoreTable;
 
+/**
+ * This class contains the creation and update of the scores table. It allows
+ * the players to quit the game and resume later.
+ * 
+ * @author Chloe Brouzes & Maxime Lasserre
+ * 
+ */
 public class ScoresDAO {
 	private Database dbHandler;
 
@@ -71,18 +78,19 @@ public class ScoresDAO {
 	public void insert(Player p) {
 		ScoreTable s = p.getScores();
 		try {
-			dbHandler.execSQL("INSERT INTO scores ('" + PLAYER + "', '"
-					+ COMBINATION_ONE + "', '" + COMBINATION_TWO + "', '"
-					+ COMBINATION_THREE + "', '" + COMBINATION_FOUR + "', '"
-					+ COMBINATION_FIVE + "', '" + COMBINATION_SIX + "', '"
-					+ COMBINATION_TWOPAIRS + "', '" + COMBINATION_THREEOFAKIND
-					+ "', '" + COMBINATION_FULLHOUSE + "', '"
-					+ COMBINATION_FOUROFAKIND + "', '" + COMBINATION_STRAIGHT
-					+ "', '" + COMBINATION_YAMS + "', '" + COMBINATION_PLUS
-					+ "', '" + COMBINATION_MINUS + "', '" + COMBINATION_CHANCE
-					+ "') VALUES ('" + p.getName() + "', '"
-					+ s.get(Combination.ONE) + "', '" + s.get(Combination.TWO)
-					+ "', '" + s.get(Combination.THREE) + "', '"
+			dbHandler.execSQL("INSERT INTO " + TABLE_NAME + " ('" + PLAYER
+					+ "', '" + COMBINATION_ONE + "', '" + COMBINATION_TWO
+					+ "', '" + COMBINATION_THREE + "', '" + COMBINATION_FOUR
+					+ "', '" + COMBINATION_FIVE + "', '" + COMBINATION_SIX
+					+ "', '" + COMBINATION_TWOPAIRS + "', '"
+					+ COMBINATION_THREEOFAKIND + "', '" + COMBINATION_FULLHOUSE
+					+ "', '" + COMBINATION_FOUROFAKIND + "', '"
+					+ COMBINATION_STRAIGHT + "', '" + COMBINATION_YAMS + "', '"
+					+ COMBINATION_PLUS + "', '" + COMBINATION_MINUS + "', '"
+					+ COMBINATION_CHANCE + "') VALUES ('" + p.getName()
+					+ "', '" + s.get(Combination.ONE) + "', '"
+					+ s.get(Combination.TWO) + "', '"
+					+ s.get(Combination.THREE) + "', '"
 					+ s.get(Combination.FOUR) + "', '"
 					+ s.get(Combination.FIVE) + "', '" + s.get(Combination.SIX)
 					+ "', '" + s.get(Combination.TWOPAIRS) + "', '"
@@ -97,10 +105,6 @@ public class ScoresDAO {
 		} catch (SQLiteGdxException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void delete(int id) {
-		// dbHandler.execSQL();
 	}
 
 	public void update(int id) {
@@ -149,7 +153,7 @@ public class ScoresDAO {
 		} catch (SQLiteGdxException e) {
 			e.printStackTrace();
 		}
-		
+
 		cursor.next();
 
 		p.setScore(Combination.ONE, cursor.getInt(2));

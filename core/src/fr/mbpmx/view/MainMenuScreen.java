@@ -49,10 +49,7 @@ public class MainMenuScreen extends YamsScreen {
 			}
 		});
 		buttonNewGame.pad(15);
-
-		scoresDAO = new ScoresDAO();
-		Gdx.app.log("DatabaseTest", "" + scoresDAO.exist());
-
+		
 		buttonSettings = new TextButton("Settings", skin);
 		buttonSettings.addListener(new ClickListener() {
 			@Override
@@ -85,6 +82,8 @@ public class MainMenuScreen extends YamsScreen {
 		table.add(heading).spaceBottom(75).row();
 		table.add(buttonNewGame).spaceBottom(15).row();
 		
+		scoresDAO = new ScoresDAO();
+
 		if (scoresDAO.exist()) {
 			buttonResume = new TextButton("Resume", skin);
 			buttonResume.addListener(new ClickListener() {

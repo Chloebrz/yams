@@ -145,12 +145,12 @@ public class ScoresDAO {
 		DatabaseCursor cursor = null;
 		try {
 			cursor = dbHandler.rawQuery("SELECT * " + " FROM " + TABLE_NAME
-					+ " WHERE " + PLAYER + " = " + p.getName());
+					+ " WHERE " + PLAYER + " = " + "'" + p.getName() + "'");
 		} catch (SQLiteGdxException e) {
 			e.printStackTrace();
 		}
 
-		p.setScore(Combination.ONE, cursor.getInt(2));
+		p.setScore(Combination.ONE, Integer.valueOf(cursor.getInt(2)));
 		p.setScore(Combination.TWO, cursor.getInt(3));
 		p.setScore(Combination.THREE, cursor.getInt(4));
 		p.setScore(Combination.FOUR, cursor.getInt(5));

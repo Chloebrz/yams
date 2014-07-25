@@ -72,7 +72,7 @@ public class MainMenuScreen extends YamsScreen {
 			}
 		});
 		buttonInstructions.pad(10);
-		
+
 		buttonHighScores = new TextButton("High scores", skin);
 		buttonHighScores.addListener(new ClickListener() {
 			@Override

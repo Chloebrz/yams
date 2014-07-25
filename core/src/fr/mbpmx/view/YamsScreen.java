@@ -3,8 +3,10 @@ package fr.mbpmx.view;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -17,10 +19,18 @@ public abstract class YamsScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		int screenWidth = Gdx.graphics.getWidth();
+		int screenHeight = Gdx.graphics.getHeight();
 
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Color darkGreen = new Color(0.0012f, 0.23f, 0.039f, 1);
+		Color lightGreen = new Color(0.023f, 0.507f, 0.082f, 1);
 
+		ShapeRenderer shapeRenderer = new ShapeRenderer();
+		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.rect(0, 0, screenWidth, screenHeight, darkGreen,
+				darkGreen, lightGreen, lightGreen);
+		stage.draw();
+		shapeRenderer.end();
 
         stage.act(delta);
         stage.draw();
@@ -63,5 +73,4 @@ public abstract class YamsScreen implements Screen {
         stage.dispose();
         skin.dispose();
 	}
-
 }

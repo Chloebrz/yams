@@ -35,7 +35,7 @@ public class GameScreen extends YamsScreen {
 
 	private Label heading, scores;
 
-	private LinkedHashMap<Combination, TextButton> textButtons;
+	private LinkedHashMap<Combination, Label> labelList;
 
 	private ScoresDAO scoresDAO;
 
@@ -56,7 +56,7 @@ public class GameScreen extends YamsScreen {
 		super.show();
 
 		controller = new Controller();
-		textButtons = new LinkedHashMap<Combination, TextButton>();
+		labelList = new LinkedHashMap<Combination, Label>();
 
 		skinDices = new Skin(Gdx.files.internal("ui/dices.json"),
 				new TextureAtlas("ui/dices.pack"));
@@ -65,6 +65,7 @@ public class GameScreen extends YamsScreen {
 		heading = new Label(controller.getCurrentPlayer().getName(), skin,
 				"small");
 		heading.setFontScale(2);
+		
 
 		scores = new Label("", skin);
 
@@ -134,6 +135,7 @@ public class GameScreen extends YamsScreen {
 		table.add(heading).row();
 		table.add(scoreTable).space(10);
 		table.add(dicesTable);
+		table.debug();
 		stage.addActor(table);
 
 		updateScoreTable();
@@ -172,24 +174,24 @@ public class GameScreen extends YamsScreen {
 	public void createScoresTable() {
 
 		for (Combination c : Combination.class.getEnumConstants()) {
-			TextButton textButton = new TextButton("  ", skin, "small");
-			textButtons.put(c, textButton);
+			Label textButton = new Label("  ", skin, "small");
+			labelList.put(c, textButton);
 		}
 
-		for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet()) {
+		for (Map.Entry<Combination, Label> entry : labelList.entrySet()) {
 			scoreTable.add(new Label(entry.getKey().toString(), skin, "small"));
 			scoreTable.add(entry.getValue()).spaceBottom(5).row();
 		}
 	}
 
 	public void addScore() {
-		for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet()) {
+		for (Map.Entry<Combination, Label> entry : labelList.entrySet()) {
 			entry.getValue().addListener(new AddScoreListener(entry.getKey()));
 		}
 	}
 
 	public void updateScoreTable() {
-		for (Map.Entry<Combination, TextButton> entry : textButtons.entrySet()) {
+		for (Map.Entry<Combination, Label> entry : labelList.entrySet()) {
 			if (controller.getCurrentPlayer().getScores().get(entry.getKey()) == -1) {
 				entry.getValue().setText("  ");
 			} else {

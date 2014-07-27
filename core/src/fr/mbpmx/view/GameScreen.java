@@ -7,6 +7,8 @@ import java.util.Map;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -16,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 
 import fr.mbpmx.controller.Controller;
 import fr.mbpmx.database.ScoresDAO;
@@ -39,11 +42,13 @@ public class GameScreen extends YamsScreen {
 
 	private ScoresDAO scoresDAO;
 
+	private NinePatchDrawable ninePatchDrawable;
+
 	@Override
 	public void render(float delta) {
 		super.render(delta);
 
-		Table.drawDebug(stage);
+		//Table.drawDebug(stage);
 	}
 
 	@Override
@@ -55,6 +60,9 @@ public class GameScreen extends YamsScreen {
 	public void show() {
 		super.show();
 
+		ninePatchDrawable = new NinePatchDrawable(new NinePatch(new Texture(
+				"img/degrade.9.png")));
+
 		controller = new Controller();
 		labelList = new LinkedHashMap<Combination, Label>();
 
@@ -65,7 +73,6 @@ public class GameScreen extends YamsScreen {
 		heading = new Label(controller.getCurrentPlayer().getName(), skin,
 				"small");
 		heading.setFontScale(2);
-		
 
 		scores = new Label("", skin);
 
@@ -130,6 +137,7 @@ public class GameScreen extends YamsScreen {
 
 		scoreTable = new Table();
 		createScoresTable();
+		scoreTable.setBackground(ninePatchDrawable);
 		scoreTable.left().center();
 
 		table.add(heading).row();
